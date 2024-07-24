@@ -28,7 +28,6 @@
     "firebase": "^10.12.4",
     "framer-motion": "^10.6.1",
     "gsap": "^3.11.5",
-    "gsap-trial": "^3.12.5",
     "kinet": "^2.2.1",
     "lodash": "^4.17.21",
     "next": "^13.4.12",

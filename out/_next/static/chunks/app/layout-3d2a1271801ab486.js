@@ -1,2 +1,0 @@
-(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[185],{9203:function(n,e,_){Promise.resolve().then(_.t.bind(_,8420,23)),Promise.resolve().then(_.t.bind(_,3177,23))},3177:function(){},8420:function(n){n.exports={style:{fontFamily:"'__Rubik_d2217f', '__Rubik_Fallback_d2217f'",fontStyle:"normal"},className:"__className_d2217f"}}},function(n){n.O(0,[971,596,744],(function(){return e=9203,n(n.s=e);var e}));var e=n.O();_N_E=e}]);
-//# sourceMappingURL=layout-3d2a1271801ab486.js.map
