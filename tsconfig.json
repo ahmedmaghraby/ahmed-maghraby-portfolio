@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "allowImportingTsExtensions": true,
+    "allowJs": true,
+    "incremental": true,
+    "lib": [
+      "esnext"
+    ],
+    "moduleDetection": "force",
+    "noEmit": true,
+    "types": [
+      "bun-types"
+    ],
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    
+  },
+  "include": [
+    ".next/types/**/*.ts",
+    "app/work-section/projectDetails.ts",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "main/types/**/*.ts",
+    "dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

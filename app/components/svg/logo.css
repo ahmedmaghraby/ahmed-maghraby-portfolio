@@ -1,0 +1,10 @@
+svg {
+  display: none;
+  display: block;
+}
+svg:hover {
+  transform: scale(1.5);
+}
+#path {
+  visibility: hidden;
+}
