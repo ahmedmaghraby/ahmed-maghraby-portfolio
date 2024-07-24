@@ -70,7 +70,7 @@ Welcome to my interactive portfolio! This project showcases my skills and projec
     ├── public/                # Public assets
     ├── src/
     │   ├── animations/        # Animation-related component
-    │   ├── assets/            # Static assets used in the application
+    │   ├── assets/            # css file used in the application
     │   ├── components/        # React components
     │   ├── helper/            # Helper functions and utilities
     │   ├── sections/          # Sections of the application (likely about section)
