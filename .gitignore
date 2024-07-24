@@ -6,5 +6,4 @@
 /out
 config.js
 config.js
-/.firebase
-config.js
+./config.js
