@@ -1,4 +1,4 @@
-# Portfolio Project
+# Ahmed Maghraby Portfolio Project
 
 Welcome to my interactive portfolio! This project showcases my skills and projects using a modern and dynamic web interface built with Next.js and TypeScript. Below, you'll find details about the technologies and libraries used, as well as how to set up and run the project locally.
 
@@ -70,7 +70,7 @@ Welcome to my interactive portfolio! This project showcases my skills and projec
     ├── public/                # Public assets
     ├── src/
     │   ├── animations/        # Animation-related component
-    │   ├── assets/            # Static assets used in the application
+    │   ├── assets/            # css file used in the application
     │   ├── components/        # React components
     │   ├── helper/            # Helper functions and utilities
     │   ├── sections/          # Sections of the application (likely about section)
