@@ -1,12 +1,12 @@
 // @ts-check
 
 const isProduction = process.env.NODE_ENV === "production";
-const outputDir = process.env.BRANCH === 'dev' ? 'dev' : '.next';
+const outputDir = process.env.BRANCH === "dev" ? "dev" : ".next";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   distDir: outputDir,
-  output: 'export',
+  output: "export",
   compiler: {
     reactRemoveProperties: isProduction,
     removeConsole: isProduction,
@@ -28,8 +28,15 @@ const nextConfig = {
   productionBrowserSourceMaps: isProduction,
   swcMinify: !isProduction,
   images: {
-    domains: ["raw.githubusercontent.com",'i.imgur.com',"firebasestorage.googleapis.com"],
-
+    unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+        port: "",
+        pathname: "**",
+      },
+    ],
   },
 };
 

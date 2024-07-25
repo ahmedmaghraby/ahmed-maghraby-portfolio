@@ -32,11 +32,57 @@
     @apply text-sm;
     @apply font-semibold;
   }
+
+  .blur-2xl {
+    --tw-blur: blur(40px);
+    filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast)
+      var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert)
+      var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+  }
+
+  .backdrop-blur-sm {
+    --tw-backdrop-blur: blur(4px);
+    -webkit-backdrop-filter: var(--tw-backdrop-blur)
+      var(--tw-backdrop-brightness) var(--tw-backdrop-contrast)
+      var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate)
+      var(--tw-backdrop-invert) var(--tw-backdrop-opacity)
+      var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
+    backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness)
+      var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale)
+      var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert)
+      var(--tw-backdrop-opacity) var(--tw-backdrop-saturate)
+      var(--tw-backdrop-sepia);
+  }
+
+  @media (min-width: 640px) {
+    .sm\:sticky {
+      position: sticky;
+    }
+
+    .sm\:leading-6 {
+      line-height: 1.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .md\:px-6 {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+
+    .md\:opacity-50 {
+      opacity: 0.5;
+    }
+  }
 }
 
 @layer utilities {
   .overlay-mask {
-    mask-image: linear-gradient(0deg, rgb(0 0 0 / 100%) 0%, rgb(0 0 0 / 0%) 40%);
+    mask-image: linear-gradient(
+      0deg,
+      rgb(0 0 0 / 100%) 0%,
+      rgb(0 0 0 / 0%) 40%
+    );
   }
 }
 
@@ -48,8 +94,6 @@ body {
 body {
   overflow-y: hidden;
 }
-
-
 
 .content {
   position: relative;
@@ -67,26 +111,25 @@ body {
   position: relative;
 }
 .content__line::after {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background-color: rgb(14 16 22 );
+  background-color: rgb(14 16 22);
   opacity: 0.825;
   transform: translateX(var(--overlay-offset, 0%));
 }
 @media (prefers-color-scheme: light) {
   .content {
-      color: #404040;
- }
+    color: #404040;
+  }
 }
-
 
 .contact {
   width: 100%;
   padding: 5rem 0 8rem;
   margin-top: -3px;
   border-radius: 0 0 2rem 2rem;
-  background-color: #0e1016  ;
+  background-color: #0e1016;
   overflow: hidden;
   pointer-events: all;
   box-shadow: 0 2rem 1.125rem -1.125rem rgba(235, 235, 235, 0.0875);

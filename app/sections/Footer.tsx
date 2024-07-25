@@ -15,14 +15,14 @@ const Footer = () => {
                     text={"© Ahmed Maghraby" + new Date().getFullYear()}
                     className={"m-0 p-0"}
                 />
-                <div className="flex flex-col sm:flex-row  sm:gap-1 md:gap-2">
+                <div className="flex flex-row gap-1 md:flex-col md:gap-2">
                     <AnimatedBody text={"Deployed by"} className={"m-0 p-0"} />
                     <Link
                         href="https://ahmedmaghraby.me"
                         target="_blank"
                         aria-label="Ahmed Maghraby's Portfolio"
                     >
-                        <span className="underline underline-offset-2 hover:no-underline">
+                        <span className="underline cursor-pointer underline-offset-2 hover:no-underline">
                             <AnimatedBody text={"Ahmed Maghraby"} className={"m-0 p-0"} />
                         </span>{" "}
                     </Link>

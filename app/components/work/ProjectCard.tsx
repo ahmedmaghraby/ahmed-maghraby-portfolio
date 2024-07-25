@@ -41,7 +41,7 @@ const ProjectCard = ({
           alt={name}
           width={500}
           height={500}
-          className={`absolute -bottom-2 w-[70%] sm:w-[85%] md:w-[60%] lg:max-w-[55%] ${
+          className={`absolute -bottom-2 w-[70%] none md:block lg:max-w-[55%] ${
             id % 2 === 0 ? "right-0" : "left-0"
           }`}
           priority={true}
@@ -91,8 +91,8 @@ const ProjectCard = ({
         <div
           className={`absolute text-white  ${
             !(id % 2 === 0)
-              ? "right-0 top-32 mr-0 ml-10 md:right-0 md:ml-0 lg:right-0 lg:top-52  lg:mr-4"
-              : "left-10 top-32 ml-0 md:mr-12 lg:top-52 lg:ml-4"
+              ? "right-0 top-24 mr-0 ml-10 md:right-0 md:ml-0 lg:right-0 lg:top-52  lg:mr-4"
+              : "left-10 top-24 ml-0 md:mr-12 lg:top-52 lg:ml-4"
           } mb-10  md:mb-16 lg:mb-14 `}
         >
           <AnimatedTitle

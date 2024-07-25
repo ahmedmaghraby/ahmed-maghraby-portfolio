@@ -29,7 +29,7 @@ const Contact = () => {
         </div>
 
         <div className="mt-20 flex w-full flex-col items-end justify-center gap-16 sm:mt-32 sm:gap-12 md:mt-40 md:flex-row md:items-start md:justify-between lg:mt-12 lg:max-w-[1440px]">
-          <div className="flex flex-col items-center text-base font-semibold text-center uppercase  text-main md:items-start md:text-left">
+          <div className="flex flex-col items-center text-base font-semibold text-center uppercase text-main md:items-start md:text-left">
             <AnimatedBody
               text={"Let's create something amazing together. Contact me!"}
               className={
@@ -44,7 +44,7 @@ const Contact = () => {
             >
               <AnimatedBody
                 text={"Send me an email"}
-                className={"text-center lg:text-left"}
+                className={"text-center cursor-pointer lg:text-left"}
               />
             </Link>
           </div>
@@ -57,7 +57,7 @@ const Contact = () => {
             >
               <AnimatedTitle
               text={"LINKEDIN"}
-                className={"text-base font-bold text-main"}
+                className={"text-base cursor-pointer font-bold text-main"}
                 wordSpace={"mr-[0.25em]"}
                 charSpace={"mr-[0.01em]"}
               />
@@ -69,7 +69,7 @@ const Contact = () => {
             >
               <AnimatedTitle
                 text={"GITHUB"}
-                className={"text-base font-bold text-main"}
+                className={"text-base cursor-pointer font-bold text-main"}
                 wordSpace={"mr-[0.25em]"}
                 charSpace={"mr-[0.01em]"}
               />
@@ -81,7 +81,7 @@ const Contact = () => {
             >
               <AnimatedTitle
                 text={"CALENDAR"}
-                className={"text-base font-bold text-main"}
+                className={"text-base cursor-pointer font-bold text-main"}
                 wordSpace={"mr-[0.25em]"}
                 charSpace={"mr-[0.01em]"}
               />

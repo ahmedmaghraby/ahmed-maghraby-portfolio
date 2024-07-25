@@ -2,8 +2,7 @@
 /node_modules
 /.next
 /out
-/out
-/out
-config.js
+./out
 config.js
 ./config.js
+

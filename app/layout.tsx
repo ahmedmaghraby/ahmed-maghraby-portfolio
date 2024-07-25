@@ -81,7 +81,7 @@ export const metadata: Metadata = {
         siteName: "Ahmed Maghraby | Portfolio",
         images: [
             {
-                url: "./public/metadata.jpg",
+                url: "./public/metadata.png",
                 width: 1200,
                 height: 630,
                 alt: "Ahmed Maghraby | Portfolio",
@@ -96,7 +96,7 @@ export const metadata: Metadata = {
         description:`I'm Ahmed Maghraby and I'm a software engineer with ${new Date().getFullYear() - 2018} years of experience.`,
         creator: "Ahmed Maghraby",
         creatorId: "0000000000",
-        images: ["./public/metadata.jpg"],
+        images: ["./public/metadata.png"],
     },
     robots: {
         index: true,
