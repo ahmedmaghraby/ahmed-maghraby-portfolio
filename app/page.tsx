@@ -13,7 +13,10 @@ import Work from "./sections/Work.tsx";
 import Contact from "./sections/Contact.tsx";
 import Footer from "./sections/Footer.tsx";
 import Tools from "./sections/Tools.tsx";
-import EmailScroller from "./sections/EmailScroller";
+import EmailScroller from "./sections/EmailScroller.tsx";
+import BookMeeting from "./sections/BookMeeting.tsx";
+import Banner from "./components/other/plastine.tsx";
+
 
 export default function Home() {
 
@@ -56,12 +59,15 @@ export default function Home() {
     return (
         <>
             <PreLoader />
+            <Banner />
+
             <NavBar />
             <main
                 className="flex flex-col items-center justify-center bg-black"
             >
                 <Hero />
                 <About />
+                <BookMeeting />
                 <Work />
                 <Tools />
                 <EmailScroller />
