@@ -96,5 +96,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ---
 
 Feel free to reach out if you have any questions or feedback! Thank you for visiting my portfolio project.
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=ahmedmaghraby-prtflio&label=Profile%20views&color=0e75b6&style=flat" alt="ahmedmaghraby" /> </p>
+<p align="left"> <img src="https://komarev.com/ghpvc/?username=ahmed-maghraby-portfolio&label=Profile%20views&color=0e75b6&style=flat" alt="ahmedmaghraby" /> </p>
 
