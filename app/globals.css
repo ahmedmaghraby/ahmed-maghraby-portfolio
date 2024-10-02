@@ -144,6 +144,29 @@ body {
   cursor: none;
 }
 
+.contact__Branding__row {
+  display: block;
+  font-size: clamp(2.49rem, calc(1.37rem + 5.57vw), 5.34rem);
+  margin: 0;
+  white-space: nowrap;
+  will-change: transform;
+}
+/* 
+.contact__Branding__row {
+  white-space: nowrap;
+  font-size: clamp(2.49rem, calc(1.37rem + 5.57vw), 3.34rem);
+  animation: loop 10s linear infinite;
+}
+
+@keyframes loop {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+} */
+
 .contact__email__row {
   display: block;
   font-size: clamp(2.49rem, calc(1.37rem + 5.57vw), 5.34rem);
@@ -155,6 +178,11 @@ body {
 .contact__email__row__text {
   color: transparent;
   -webkit-text-stroke: 1px #ccc; /* Darkened white by 40% */
+}
+
+.nav-scrolled {
+  background: rgb(33, 37, 48 0);
+  backdrop-filter: saturate(1.8) blur(20px);
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -1,12 +1,12 @@
 import "./globals.css";
 import React, { ReactNode } from "react";
 import type { Metadata } from "next";
-import { Rubik } from "next/font/google";
+import { Lexend_Tera } from "next/font/google";
 
-const font = Rubik({
+const font = Lexend_Tera({
     subsets: ["latin"],
     display: "block",
-    weight: ["400", "500", "600", "700", "800"],
+    weight: ['100','200','300',"400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {

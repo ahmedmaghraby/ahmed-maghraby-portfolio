@@ -1,10 +1,8 @@
-svg {
-  display: none;
-  display: block;
-}
-svg:hover {
-  transform: scale(1.5);
-}
-#path {
-  visibility: hidden;
+.typewriter{
+  background: linear-gradient(306deg,#e68e2e, #f5d393);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transform: translate(0px, 50px) skew(9deg, 8deg);
+
 }

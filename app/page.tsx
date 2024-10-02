@@ -1,10 +1,10 @@
 "use client";
 import React, {useState} from "react";
-import { ScrollerMotion } from "scroller-motion";
 import { useEffectOnce, useEventListener } from 'usehooks-ts';
 
 import PreLoader from "./components/other/PreLoader.tsx";
 import useBlobity from "./components/blobity/useBlobity.ts";
+import { GsapTimelineProvider } from './context/gsapTimeLIne.tsx';
 
 import NavBar from "./sections/NavBar.tsx";
 import Hero from "./sections/Hero.tsx";
@@ -58,9 +58,9 @@ export default function Home() {
 
     return (
         <>
-            <PreLoader />
-            <Banner />
+            <GsapTimelineProvider>
 
+            <PreLoader />
             <NavBar />
             <main
                 className="flex flex-col items-center justify-center bg-black"
@@ -74,6 +74,7 @@ export default function Home() {
                 <Contact />
                 <Footer />
             </main>
+            </GsapTimelineProvider>
         </>
     );
 }
