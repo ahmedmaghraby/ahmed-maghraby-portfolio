@@ -7,31 +7,95 @@ import { motion } from "framer-motion";
 import Container from "../container/Container";
 import React from "react";
 import { SiGithub } from "react-icons/si";
-import { BsLink45Deg } from "react-icons/bs";
-import {iconMapper} from "../../helper/iconMapper";
+import { GoArrowUpRight } from "react-icons/go";
+import { iconMapper } from "../../helper/iconMapper";
+import { Roboto } from "../../helper/font";
+
 const ProjectCard = ({
   id,
   name,
   description,
-  techNames,
-  github,
   demo,
   image,
   available,
 }: ProjectProps) => {
   return (
     <motion.div
-      className={`relative z-10 h-[550px] w-full items-stretch justify-center bg-cover bg-center bg-no-repeat py-0 sm:h-[700px] sm:w-[100%] md:h-[650px] md:w-[100%] lg:h-[500px]`}
+      className={`relative z-10  flex w-full flex-col items-stretch justify-center gap-4 py-0 md:gap-6 lg:gap-8 `}
       initial="initial"
       animate="animate"
     >
-      <Container
+      <div className="flex flex-row items-center justify-between">
+        <AnimatedTitle
+          text={name}
+          className={`${Roboto.className} text-lg font-semibold leading-none text-t-color md:text-xl lg:text-2xl`}
+          wordSpace={"mr-[0.25em]"}
+          charSpace={"-mr-[0.01em]"}
+        />
+        {available ? (
+          <>
+            {demo && (
+              <Link
+                href={demo}
+                target="_blank"
+                aria-label="Open Live Demo"
+                className="text-sm font-light caseStudy md:text-md text-t-color lg:text-lg"
+                data-no-blobity
+              >
+                Case Study
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 10 10"
+                  fill="none"
+                  className="arrow-icon"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <linearGradient id="MyGradient">
+                      <stop offset="5%" stop-color="#EBAB58" />
+                      <stop offset="95%" stop-color="#f5d393" />
+                    </linearGradient>
+                  </defs>
+
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M1.17574 8.82426C1.41005 9.05858 1.78995 9.05858 2.02426 8.82426L7.8 3.04853V7.6C7.8 7.93137 8.06863 8.2 8.4 8.2C8.73137 8.2 9 7.93137 9 7.6V1.6C9 1.26863 8.73137 1 8.4 1H2.4C2.06863 1 1.8 1.26863 1.8 1.6C1.8 1.93137 2.06863 2.2 2.4 2.2H6.95147L1.17574 7.97574C0.941421 8.21005 0.941421 8.58995 1.17574 8.82426Z"
+                    fill="#EBAB58"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </Link>
+            )}
+          </>
+        ) : (
+          <div></div>
+        )}
+      </div>
+
+      <AnimatedBody
+        text={description}
+        className={
+          "md:text-md max-w-full pr-10 text-sm font-light text-t-color lg:text-lg "
+        }
+      />
+
+      <Image
+        src={image}
+        alt={name}
+        className={`w-full`}
+        width={10}  
+        height={10}
+        priority={true}
+      />
+      {/* <Container
         width="100%"
         height="100%"
         borderRadius={25}
-        color="rgba(255, 255, 255, 0.1)"
+        color="transparent"
         blur={false}
-        grain={true}
         top="0px"
         left="0px"
         angle={0}
@@ -41,7 +105,7 @@ const ProjectCard = ({
           alt={name}
           width={500}
           height={500}
-          className={`absolute -bottom-2 w-[70%] none md:block lg:max-w-[55%] ${
+          className={`none absolute -bottom-2 w-[70%] md:block lg:max-w-[55%] ${
             id % 2 === 0 ? "right-0" : "left-0"
           }`}
           priority={true}
@@ -95,39 +159,9 @@ const ProjectCard = ({
               : "left-10 top-24 ml-0 md:mr-12 lg:top-52 lg:ml-4"
           } mb-10  md:mb-16 lg:mb-14 `}
         >
-          <AnimatedTitle
-            text={name}
-            className={
-              "max-w-[90%] text-[40px] leading-none text-secondary md:text-[44px] md:leading-none lg:max-w-[450px] lg:text-[48px] lg:leading-none"
-            }
-            wordSpace={"mr-[0.25em]"}
-            charSpace={"-mr-[0.01em]"}
-          />
-          <AnimatedBody
-            text={description}
-            className={
-              "mt-4 w-[90%] max-w-[457px] text-main text-[16px] font-semibold "
-            }
-          />
-          <div className="grid grid-cols-5 gap-5 mt-9 mb-9">
-            {techNames.map((name, id) => (
-              <div key={id} className={"relative"}>
-                <Link
-                  href={iconMapper(name).link}
-                  target="_blank"
-                  aria-label={`Learn more about ${name}`}
-                  className="w-[20px] text-[20px] md:w-[25px] md:text-[24px] lg:w-[30px] lg:text-[28px]"
-                  title={iconMapper(name).link}
-                  data-blobity-tooltip={name}
-                  data-blobity-magnetic="false"
-                >
-                  {iconMapper(name).icon}
-                </Link>
-              </div>
-            ))}
-          </div>
+        
         </div>
-      </Container>
+      </Container> */}
     </motion.div>
   );
 };

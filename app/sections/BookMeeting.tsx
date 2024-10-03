@@ -3,6 +3,7 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { Roboto } from "../helper/font";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -24,19 +25,19 @@ const BookMeeting: React.FC = () => {
           scrub: window.innerWidth >= smoothScrollBreakPoint ? true : 0.5,
         });
 
-        contactEmailRowRefs.current.forEach((item) => {
+        contactEmailRowRefs.current.forEach((item, i) => {
           if (item) {
             const scrollTrigger = scrollTriggerFactory({ current: item });
 
             const sumWidth =
-              item.offsetWidth +
+              item.offsetWidth -
               window.innerWidth / (window.innerWidth < 700 ? 2 : 4);
 
             animations.push(
               gsap.fromTo(
                 item,
-                { x: -window.innerWidth },
-                { x: sumWidth, scrollTrigger }
+                { x: i % 2 === 0 ? -sumWidth : sumWidth },
+                { x: i % 2 === 0 ? 100 : -100, scrollTrigger }
               )
             );
           }
@@ -53,21 +54,41 @@ const BookMeeting: React.FC = () => {
   return (
     <section ref={contactRef} className="contact" data-scroll-section>
       <span>
-        <span className={"contact__email"}>
-          {[...Array(rowsCount)].map((_, rowIndex) => (
-            <span
-              key={rowIndex}
-              ref={(el) => (contactEmailRowRefs.current[rowIndex] = el)}
-              className={"contact__email__row"}
-            >
-              {[...Array(textCount)].map((_, textKey) => (
-                <a key={textKey} href="https://calendar.app.google/rPaupi1Yd5vjJahRA" target="_blank" className={"contact__email__row__text"}>
-                  Schedule a meeting <span className={"serif"}>With me</span>
-                  {textKey !== textCount - 1 && <span>&nbsp; - &nbsp;</span>}
-                </a>
-              ))}
+        <span className={`contact__branding ${Roboto.className}`}>
+          <span 
+            ref={(el) => (contactEmailRowRefs.current[1] = el)}
+            className={"contact__Branding__row"}
+          >
+            <span className={"contact__email__row__text"}>
+              UI DESIGN <span>&nbsp; - &nbsp;</span> UX DESIGN{" "}
+              <span>&nbsp; - &nbsp;</span> BRANDING <span>&nbsp; - &nbsp;</span>{" "}
+              COPYWRITING <span>&nbsp; - &nbsp;</span>
+              BRANDING <span>&nbsp; - &nbsp;</span> COPYWRITING{" "}
+              <span>&nbsp; - &nbsp;</span> UX DESIGN{" "}
+              <span>&nbsp; - &nbsp;</span> UI DESIGN{" "}
+              <span>&nbsp; - &nbsp;</span>
+              COPYWRITING <span>&nbsp; - &nbsp;</span> BRANDING{" "}
+              <span>&nbsp; - &nbsp;</span> UI DESIGN{" "}
+              <span>&nbsp; - &nbsp;</span> UX DESIGN
             </span>
-          ))}
+          </span>
+          <span
+            ref={(el) => (contactEmailRowRefs.current[2] = el)}
+            className={"contact__Branding__row 2"}
+          >
+            <span className={"contact__email__row__text"}>
+            BRANDING <span>&nbsp; - &nbsp;</span> COPYWRITING{" "}
+              <span>&nbsp; - &nbsp;</span> UI DESIGN <span>&nbsp; - &nbsp;</span>{" "}
+              UX DESIGN <span>&nbsp; - &nbsp;</span>
+              BRANDING <span>&nbsp; - &nbsp;</span> COPYWRITING{" "}
+              <span>&nbsp; - &nbsp;</span> UX DESIGN{" "}
+              <span>&nbsp; - &nbsp;</span> UI DESIGN{" "}
+              <span>&nbsp; - &nbsp;</span>
+              COPYWRITING <span>&nbsp; - &nbsp;</span> BRANDING{" "}
+              <span>&nbsp; - &nbsp;</span> UI DESIGN{" "}
+              <span>&nbsp; - &nbsp;</span> UX DESIGN
+            </span>
+          </span>
         </span>
       </span>
     </section>

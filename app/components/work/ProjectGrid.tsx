@@ -2,6 +2,9 @@ import ProjectCard from "./ProjectCard";
 import { ProjectProps } from "../../types/project";
 import React, { useEffect, useState } from "react";
 import getProjects from "../../service/GetProjectDetails";
+import { Roboto } from "../../helper/font";
+import AnimatedTitle from "../../animations/AnimatedTitle";
+
 const ProjectGrid = () => {
   const [projects, setProjects] = useState<any>([]);
   useEffect(() => {
@@ -20,11 +23,13 @@ const ProjectGrid = () => {
   return (
     <>
       <div className="mb-10 flex gap-16 text-[#e4ded7] md:mb-16  lg:mb-20 ">
-        <h4
-          className={`text-[16px] md:text-[20px] lg:text-[34px] ${"text-[#e4ded7]"}`}
-        >
-          some of my work!
-        </h4>
+      <AnimatedTitle
+          text={"Selected Work"}
+          className={`${Roboto.className} font-light text-lg md:text-xl lg:text-2xl text-t-color}`}
+
+          wordSpace={"mr-[8px]"}
+          charSpace={"mr-[0.001em]"}
+        />
       </div>
 
       <div className="grid w-[90%] grid-cols-1 grid-rows-2 gap-y-10 gap-x-6 lg:max-w-[1200px] lg:grid-cols-1">

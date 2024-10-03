@@ -4,7 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 
 const db = getFirestore(firebase_app);
 export default async function getTools() {
-  const collectionRef = collection(db, 'tools');
+  const collectionRef = collection(db, 'test');
 
   let result = null;
   let error = null;

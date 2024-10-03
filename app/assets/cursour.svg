@@ -1,0 +1,31 @@
+<svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<style>
+path{
+      fill:url(#MyGradient)
+      stroke:  fill:url(#MyGradient)
+
+}
+</style>
+ <defs>
+                    <linearGradient id="MyGradient">
+                      <stop offset="5%" stop-color="#EBAB58" />
+                      <stop offset="95%" stop-color="#f5d393" />
+                    </linearGradient>
+                  </defs>
+<g filter="url(#filter0_d_460_51)">
+<path d="M8.27967 17.16L4.44035 3.69166L17.1601 9.77674L11.34 11.8389L8.27967 17.16Z" fill="#ED8936"/>
+<path d="M7.96069 17.2489L8.17599 18.0041L8.5677 17.3231L11.5673 12.1074L17.2721 10.0861L18.0171 9.82216L17.3038 9.48093L4.58406 3.39584L3.92134 3.0788L4.12138 3.78052L7.96069 17.2489Z" stroke="#ED8936" stroke-width="0.66"/>
+</g>
+<defs>
+<filter id="filter0_d_460_51" x="2.08234" y="1.80594" width="18.1117" height="19.0223" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="0.66"/>
+<feGaussianBlur stdDeviation="0.66"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_460_51"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_460_51" result="shape"/>
+</filter>
+</defs>
+</svg>

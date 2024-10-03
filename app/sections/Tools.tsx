@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { cloneElement, useEffect, useRef, useState } from "react";
 import "../animations/animate.css";
-import AnimatedBody from "../animations/AnimatedBody";
 import AnimatedTitle from "../animations/AnimatedTitle";
-import AnimatedTools from "../animations/AnimatedTools.tsx";
-import { iconMapper } from "../helper/iconMapper";
 import { Tools as ToolsType } from "../types/tools";
 import getTools from "../service/GetTools.ts";
 import Link from "next/link";
+import { Roboto } from "../helper/font";
+import Animated from "../animations/Animated.tsx";
+import Slider from "./Slider.tsx";
+import Image from "next/image";
+import Container from "../components/container/Container.tsx";
 const Tools = () => {
   const [tools, setTools] = useState<ToolsType>();
+  const logosRef = useRef<HTMLUListElement>(null); // Define the type here
+
   useEffect(() => {
     getTools().then(({ result, error }) => {
       if (error) {
@@ -20,160 +24,58 @@ const Tools = () => {
         setTools(res as ToolsType);
       }
     });
+    const ul = logosRef.current;
+    if (ul) {
+      const clone = ul.cloneNode(true) as HTMLUListElement;
+      clone.setAttribute("aria-hidden", "true");
+      ul.insertAdjacentElement("afterend", clone);
+    }
   }, []);
 
   return (
     <section
-      className="bg-[#0E1016] relative z-10 w-full items-center justify-center overflow-hidden
+      className="relative z-10 w-full items-center justify-center overflow-hidden bg-[#0E1016]
        bg-cover bg-center pt-16  md:pt-20 lg:pt-20"
       id="tools"
     >
-      <div className="mx-auto flex w-[90%] flex-col items-center justify-center lg:max-w-[1212.8px]">
+      <div className="flex flex-col items-center justify-center w-full mx-auto ">
         <AnimatedTitle
-          text={"Some of My Tools."}
-          className={
-            "mb-10 text-left text-[40px] font-bold leading-[0.9em] tracking-tighter text-[#e4ded7] sm:text-[45px] md:mb-16 md:text-[60px] lg:text-[80px]"
-          }
-          wordSpace={"mr-[14px]"}
+          text={"Brands I worked with"}
+          className={`${Roboto.className} text-t-color} text-lg font-light md:text-xl lg:text-2xl mb-12`}
+          wordSpace={"mr-[8px]"}
           charSpace={"mr-[0.001em]"}
         />
 
-        <div className="mx-auto w-[100%] justify-center lg:max-w-[1200px]">
-          {tools && tools.Design.length > 0 && (
-            <div className="mb-10 flex w-[100%] flex-col gap-4 text-[18px] font-bold leading-relaxed tracking-wide text-[#e4ded7] md:mb-16 md:gap-6 md:text-[40px] md:leading-relaxed lg:mb-16 lg:w-[50%]">
-              <AnimatedBody delay={0.1} text="Design" />
-              <div>
-                <AnimatedTools
-                  className="grid grid-cols-5 gap-4"
-                  delay={0.1}
-                  stepSize={0.1}
-                  iconSize={50}
-                >
-                  {tools.Design.map((tool) => (
-                    <Link
-                      href={iconMapper(tool)?.link}
-                      target="_blank"
-                      aria-label={`Learn more about ${tool}`}
-                      title={tool}
-                      data-blobity-tooltip={tool}
-                      data-blobity-magnetic="false"
-                    >
-                      {iconMapper(tool)?.icon}{" "}
-                    </Link>
-                  ))}
-                </AnimatedTools>
-              </div>
-            </div>
-          )}
-          {tools && tools.Frontend?.length > 0 && (
-            <div className="mb-10 flex w-[100%] flex-col gap-4 text-[18px] font-bold leading-relaxed tracking-wide text-[#e4ded7] md:mb-16 md:gap-6 md:text-[40px] md:leading-relaxed lg:mb-16 lg:w-[50%]">
-              <AnimatedBody delay={0.2} text="Frontend" />
-              <div>
-                <AnimatedTools
-                  className="grid grid-cols-5 gap-4"
-                  delay={0.2}
-                  stepSize={0.1}
-                  iconSize={50}
-                >
-                  {tools.Frontend.map((tool) => (
-                    <Link
-                      key={tool + Math.random()}
-                      href={iconMapper(tool)?.link}
-                      target="_blank"
-                      aria-label={`Learn more about ${tool}`}
-                      title={tool}
-                      data-blobity-tooltip={tool}
-                      data-blobity-magnetic="false"
-                    >
-                      {iconMapper(tool)?.icon}{" "}
-                    </Link>
-                  ))}
-                </AnimatedTools>
-              </div>
-            </div>
-          )}
-          {tools && tools.Mobile?.length > 0 && (
-            <div className="mb-10 flex w-[100%] flex-col gap-4 text-[18px] font-bold leading-relaxed tracking-wide text-[#e4ded7] md:mb-16 md:gap-6 md:text-[40px] md:leading-relaxed lg:mb-16 lg:w-[50%]">
-              <AnimatedBody delay={0.2} text="Mobile" />
-              <div>
-                <AnimatedTools
-                  className="grid grid-cols-5 gap-4"
-                  delay={0.2}
-                  stepSize={0.1}
-                  iconSize={50}
-                >
-                  {tools.Mobile.map((tool) => (
-                    <Link
-                      key={tool + Math.random()}
-                      href={iconMapper(tool)?.link}
-                      target="_blank"
-                      aria-label={`Learn more about ${tool}`}
-                      title={tool}
-                      data-blobity-tooltip={tool}
-                      data-blobity-magnetic="false"
-                    >
-                      {iconMapper(tool)?.icon}{" "}
-                    </Link>
-                  ))}
-                </AnimatedTools>
-              </div>
-            </div>
-          )}
-          {tools && tools.Backend?.length > 0 && (
-            <div className="mb-10 flex w-[100%] flex-col gap-4 text-[18px] font-bold leading-relaxed tracking-wide text-[#e4ded7] md:mb-16 md:gap-6 md:text-[40px] md:leading-relaxed lg:mb-16 lg:w-[50%]">
-              <AnimatedBody delay={0.3} text="Backend" />
-              <div>
-                <AnimatedTools
-                  className="grid grid-cols-5 gap-4"
-                  delay={0.1}
-                  stepSize={0.1}
-                  iconSize={50}
-                >
-                  {tools.Backend.map((tool) => (
-                    <Link
-                      href={iconMapper(tool)?.link}
-                      target="_blank"
-                      key={tool + Math.random()}
-                      aria-label={`Learn more about ${tool}`}
-                      title={tool}
-                      data-blobity-tooltip={tool}
-                      data-blobity-magnetic="false"
-                    >
-                      {iconMapper(tool)?.icon}{" "}
-                    </Link>
-                  ))}
-                </AnimatedTools>
-              </div>
-            </div>
-          )}
           {tools && tools.Other?.length > 0 && (
-            <div className="mb-10 flex w-[100%] flex-col gap-4 text-[18px] font-bold leading-relaxed tracking-wide text-[#e4ded7] md:mb-16 md:gap-6 md:text-[40px] md:leading-relaxed lg:mb-16 lg:w-[50%]">
-              <AnimatedBody delay={0.4} text="Other" />
-              <div>
-                <AnimatedTools
-                  className="grid grid-cols-5 gap-4"
-                  delay={0.4}
-                  stepSize={0.1}
-                  iconSize={50}
-                >
-                  {tools.Other.map((tool) => (
-                    <Link
-                      href={iconMapper(tool)?.link}
-                      target="_blank"
-                      key={tool + Math.random()}
-                      aria-label={`Learn more about ${tool}`}
-                      title={tool}
-                      data-blobity-tooltip={tool}
-                      data-blobity-magnetic="false"
-                    >
-                      {iconMapper(tool)?.icon}{" "}
-                    </Link>
-                  ))}
-                </AnimatedTools>
-              </div>
-            </div>
+            <Slider
+              width="250px"
+              duration={40}
+              pauseOnHover={true}
+              blurBorders={false}
+              blurBoderColor={"#fff"}
+            >
+              {tools.Other.map((tool, i) => (
+                <Slider.Slide key={Math.random()} className="mx-2">
+                  <Link
+                    href={tool?.link || ""}
+                    target="_blank"
+                    aria-label={`Learn more about ${tool?.name || ""}`}
+                    title={tool?.name || ""}
+                    data-blobity-tooltip={tool?.name || ""}
+                    data-blobity-magnetic="false"
+                  >
+                    <Image
+                      className="cursor-pointer-custom w-[250px] brands-Img object-cover "
+                      src={tool?.img || ""}
+                      alt={tool?.name || ""}
+                      width={150}
+                      height={150}
+                    />
+                  </Link>
+                </Slider.Slide>
+              ))}
+            </Slider>
           )}
-        </div>
       </div>
     </section>
   );

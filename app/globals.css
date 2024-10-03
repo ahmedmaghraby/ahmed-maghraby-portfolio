@@ -89,6 +89,7 @@
 html,
 body {
   overscroll-behavior: none;
+  cursor: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjEiIGhlaWdodD0iMjEiIHZpZXdCb3g9IjAgMCAyMSAyMSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHN0eWxlPgpwYXRoewogICAgICBmaWxsOnVybCgjTXlHcmFkaWVudCkKICAgICAgc3Ryb2tlOiAgZmlsbDp1cmwoI015R3JhZGllbnQpCgp9Cjwvc3R5bGU+CiA8ZGVmcz4KICAgICAgICAgICAgICAgICAgICA8bGluZWFyR3JhZGllbnQgaWQ9Ik15R3JhZGllbnQiPgogICAgICAgICAgICAgICAgICAgICAgPHN0b3Agb2Zmc2V0PSI1JSIgc3RvcC1jb2xvcj0iI0VCQUI1OCIgLz4KICAgICAgICAgICAgICAgICAgICAgIDxzdG9wIG9mZnNldD0iOTUlIiBzdG9wLWNvbG9yPSIjZjVkMzkzIiAvPgogICAgICAgICAgICAgICAgICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICAgICAgICAgICAgICAgIDwvZGVmcz4KPGcgZmlsdGVyPSJ1cmwoI2ZpbHRlcjBfZF80NjBfNTEpIj4KPHBhdGggZD0iTTguMjc5NjcgMTcuMTZMNC40NDAzNSAzLjY5MTY2TDE3LjE2MDEgOS43NzY3NEwxMS4zNCAxMS44Mzg5TDguMjc5NjcgMTcuMTZaIiBmaWxsPSIjRUQ4OTM2Ii8+CjxwYXRoIGQ9Ik03Ljk2MDY5IDE3LjI0ODlMOC4xNzU5OSAxOC4wMDQxTDguNTY3NyAxNy4zMjMxTDExLjU2NzMgMTIuMTA3NEwxNy4yNzIxIDEwLjA4NjFMMTguMDE3MSA5LjgyMjE2TDE3LjMwMzggOS40ODA5M0w0LjU4NDA2IDMuMzk1ODRMMy45MjEzNCAzLjA3ODhMNC4xMjEzOCAzLjc4MDUyTDcuOTYwNjkgMTcuMjQ4OVoiIHN0cm9rZT0iI0VEODkzNiIgc3Ryb2tlLXdpZHRoPSIwLjY2Ii8+CjwvZz4KPGRlZnM+CjxmaWx0ZXIgaWQ9ImZpbHRlcjBfZF80NjBfNTEiIHg9IjIuMDgyMzQiIHk9IjEuODA1OTQiIHdpZHRoPSIxOC4xMTE3IiBoZWlnaHQ9IjE5LjAyMjMiIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzPSJzUkdCIj4KPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4KPGZlQ29sb3JNYXRyaXggaW49IlNvdXJjZUFscGhhIiB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMTI3IDAiIHJlc3VsdD0iaGFyZEFscGhhIi8+CjxmZU9mZnNldCBkeT0iMC42NiIvPgo8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIwLjY2Ii8+CjxmZUNvbXBvc2l0ZSBpbjI9ImhhcmRBbHBoYSIgb3BlcmF0b3I9Im91dCIvPgo8ZmVDb2xvck1hdHJpeCB0eXBlPSJtYXRyaXgiIHZhbHVlcz0iMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMC4wOCAwIi8+CjxmZUJsZW5kIG1vZGU9Im5vcm1hbCIgaW4yPSJCYWNrZ3JvdW5kSW1hZ2VGaXgiIHJlc3VsdD0iZWZmZWN0MV9kcm9wU2hhZG93XzQ2MF81MSIvPgo8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluPSJTb3VyY2VHcmFwaGljIiBpbjI9ImVmZmVjdDFfZHJvcFNoYWRvd180NjBfNTEiIHJlc3VsdD0ic2hhcGUiLz4KPC9maWx0ZXI+CjwvZGVmcz4KPC9zdmc+Cg==') 16 16, pointer;;
 }
 
 body {
@@ -102,7 +103,6 @@ body {
   color: #bfbfbf;
   text-align: left;
   width: fit-content;
-  max-width: 30ch;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -143,30 +143,61 @@ body {
   text-decoration: none;
   cursor: none;
 }
-
+.contact__branding {
+  display: block;
+  position: relative;
+  color: #ccc; /* Darkened white by 40% */
+  line-height: 1;
+  text-decoration: none;
+}
 .contact__Branding__row {
   display: block;
-  font-size: clamp(2.49rem, calc(1.37rem + 5.57vw), 5.34rem);
+  font-size: clamp(2.49rem, calc(1.37rem + 5.57vw), 4.34rem);
   margin: 0;
   white-space: nowrap;
   will-change: transform;
 }
-/* 
-.contact__Branding__row {
-  white-space: nowrap;
-  font-size: clamp(2.49rem, calc(1.37rem + 5.57vw), 3.34rem);
-  animation: loop 10s linear infinite;
+.cursor-pointer-custom{
+  cursor: url(https://cdn.custom-cursor.com/db/7599/32/stain-of-paint-pointer.png)   , pointer !important
+
 }
 
-@keyframes loop {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-} */
+.brands-Img {
+  filter: invert(0.9) sepia(1) saturate(16) hue-rotate(309deg) brightness(1);
+}
 
+.caseStudy {
+  position: relative;
+  display: inline-block;
+  padding-right: 1rem;
+  cursor: url(https://cdn.custom-cursor.com/db/7599/32/stain-of-paint-pointer.png)   , pointer !important
+}
+.caseStudy:after {
+  content: "";
+  position: absolute;
+  left:0;
+  top: 100%;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(306deg,#e68e2e, #f5d393);
+  transition: width .3s ease-in-out;
+}
+.caseStudy:hover:after {
+  width: 100%;
+}
+.caseStudy .arrow-icon {
+  position: absolute;
+  bottom: -1rem;
+  right: 1rem;
+  opacity: 0;
+  fill:url(#MyGradient)
+}
+.caseStudy:hover .arrow-icon{
+  opacity: 1;
+  /* transition: opacity .3s ease-in-out; */
+  transform:  translate( 20px, -20px);
+  transition: all .3s ease-in-out;
+}
 .contact__email__row {
   display: block;
   font-size: clamp(2.49rem, calc(1.37rem + 5.57vw), 5.34rem);

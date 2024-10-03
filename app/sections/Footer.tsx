@@ -2,6 +2,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import AnimatedBody from "../animations/AnimatedBody";
 import React from "react";
+import { Roboto } from  "../helper/font";
 
 const Footer = () => {
     return (
@@ -10,7 +11,7 @@ const Footer = () => {
             initial="initial"
             animate="animate"
         >
-            <motion.div className="mx-auto flex w-[90%] flex-row items-center justify-between text-center text-base text-main ">
+            <motion.div className={`${Roboto.className} mx-auto flex w-[90%] flex-row items-center justify-between text-center text-base text-main `}>
                 <AnimatedBody
                     text={"© Ahmed Maghraby" + new Date().getFullYear()}
                     className={"m-0 p-0"}
