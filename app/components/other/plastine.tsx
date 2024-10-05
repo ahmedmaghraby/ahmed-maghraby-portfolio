@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import { Roboto } from "../../helper/font";
 export default function Banner() {
   const isDarkMode = true;
   const title = "Free Palestine 🇵🇸";
@@ -9,7 +9,7 @@ export default function Banner() {
 
   return (
     <div
-      className={`fixed bottom-3 w-[90vw] md:w-[35vw] left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 isolate z-50 flex items-center overflow-hidden ${
+      className={` ${Roboto.className} fixed bottom-3 w-[90vw] md:w-[35vw] left-1/2 -translate-x-1/2 md:left-0 md:translate-x-0 isolate z-50 flex items-center overflow-hidden ${
         isDarkMode ? "bg-gray-600/70" : "bg-gray-50/70"
       } px-3.5 py-2.5 backdrop-blur-sm  md:px-6`}
     >

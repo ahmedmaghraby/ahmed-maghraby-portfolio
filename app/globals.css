@@ -109,6 +109,8 @@ body {
 .content__line {
   width: fit-content !important;
   position: relative;
+  text-align: justify;
+  text-justify: inter-word;
 }
 .content__line::after {
   content: "";

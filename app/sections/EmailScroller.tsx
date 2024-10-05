@@ -3,7 +3,7 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-
+import { Roboto } from "../helper/font";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const EmailScroller: React.FC = () => {
@@ -53,7 +53,7 @@ const EmailScroller: React.FC = () => {
   return (
     <section ref={contactRef} className="contact" data-scroll-section>
       <span>
-        <span className={"contact__email"}>
+        <span className={`${Roboto.className} contact__email`}>
           {[...Array(rowsCount)].map((_, rowIndex) => (
             <span
               key={rowIndex}

@@ -59,7 +59,7 @@ export default function Home() {
     return (
         <>
             <GsapTimelineProvider>
-
+             <Banner />
             <PreLoader />
             <NavBar />
             <main

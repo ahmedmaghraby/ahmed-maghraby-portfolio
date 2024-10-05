@@ -22,9 +22,9 @@ const Contact = () => {
           className={`flex flex-col items-start justify-center relative w-full sm:items-center lg:max-w-[1440px] `}
         >
           <AnimatedWords
-            title={"contact"}
+            title={"Find me!"}
             style={
-              "flex flex-col items-start text-left font-extrabold uppercase leading-[0.9em] text-secondary text-[20vw] sm:max-w-full sm:flex-row sm:items-center sm:justify-center text-center "
+              "flex flex-col items-start text-left font-extrabold uppercase leading-[0.9em] text-secondary text-[18vw] sm:max-w-full sm:flex-row sm:items-center sm:justify-center text-center "
             }
           />
         </div>

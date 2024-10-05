@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { GsapTimelineContext } from "../../context/gsapTimeLIne";
-
+import { Roboto } from "../../helper/font";
 const PreLoader: React.FC = () => {
   const tl = useContext(GsapTimelineContext);
 
@@ -75,14 +75,14 @@ const PreLoader: React.FC = () => {
 
   return (
     <div className="preloader fixed bottom-0 left-0 right-0 z-[55] flex h-[100vh] w-full flex-col items-center justify-center gap-[5px] overflow-hidden bg-black text-t-color sm:gap-3">
-      <div className="flex items-center justify-center overflow-hidden font-bold opacity-0 texts-container text-t-color sm:text-3xl md:text-5xl lg:text-7xl">
+      <div className={` ${Roboto.className} flex items-center justify-center overflow-hidden font-bold opacity-0 texts-container text-t-color sm:text-2xl md:text-3xl lg:text-4xl`}>
         <span className="block">Design is so simple,
           <br /> that's why it is so
           <br/> complicated.</span>
 
         <div className="hidden sub"></div>
       </div>
-      <div className="flex items-center justify-start overflow-hidden font-light opacity-0 texts-container text-t-color sm:text-3xl md:text-5xl lg:text-7xl">
+      <div className={` ${Roboto.className} flex items-center justify-start overflow-hidden font-light opacity-0 texts-container text-t-color sm:text-md md:text-lg lg:text-xl`}>
         <span>- Paul Rand</span>
         <div className="hidden sub"></div>
       </div>

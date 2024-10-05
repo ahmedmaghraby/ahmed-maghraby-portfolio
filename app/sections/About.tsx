@@ -39,31 +39,34 @@ const About = () => {
 
   return (
     <section
-      className="md:pt-20lg:pt-20 relative z-10 w-full items-center justify-center overflow-hidden bg-[#0E1016] bg-cover bg-center pt-16"
+      className="py-28 relative z-10 w-full items-center justify-center overflow-hidden bg-[#0E1016] bg-cover bg-center"
       id="about"
       ref={about}
     >
-      <div className="mx-auto grid w-[90%] grid-cols-1  flex-row items-center justify-center md:grid-cols-2 lg:max-w-[1212.8px]">
+      <div className="mx-auto grid w-[90%] grid-cols-1  flex-row items-center justify-center md:grid-cols-3 lg:max-w-[1212.8px]">
         <h2
           className={
-            "mb-10 text-left text-xl font-extralight tracking-tighter text-[#e4ded7] sm:text-2xl md:mb-16 lg:text-4xl"
+            "mb-10 text-left text-xl font-light tracking-tighter text-[#e4ded7] sm:text-2xl md:mb-16 lg:text-4xl"
           }
-        
         >
-            Driven by Curiosity. 
-            <br/>Guided by Purpose
+          Driven by <br />
+          Curiosity.
+          <br />
+          Guided by
+          <br />
+          Purpose
         </h2>
 
         <div
-          className={`${Roboto.className} mx-auto flex w-[100%]`}
+          className={`${Roboto.className} mx-auto col-span-2 flex w-[100%]`}
           ref={container as React.RefObject<HTMLDivElement>}
         >
-          <div className="content mb-10 flex w-[100%] flex-col gap-4 text-[18px]  font-medium leading-relaxed tracking-wide text-[#e4ded7] md:mb-16 md:gap-6 md:text-[20px] md:leading-relaxed  lg:mb-16 lg:max-w-[90%] lg:text-[24px]">
+          <div className="content mb-10 flex w-[100%] flex-col gap-4 text-lg  font-light leading-relaxed tracking-wide text-t-color md:mb-16 md:gap-6 md:text-lg md:leading-relaxed  lg:mb-16 lg:text-xl">
             <span className="span">
-              I'm Mohammed Ali an Egyptian product designer with over{" "} {new Date().getFullYear() - 2020} years of experience,specializing in UX design, wireframing, and prototyping. Driven by
-              a passion for crafting experiences that matter, I left a stable
-              career to pursue what I love—creating digital solutions that are
-              both intuitive and impactful. My expertise in user interface, user
+              I'm Mohammed Ali an Egyptian product designer with over{" "} {new Date().getFullYear() - 2020} years of experience,specializing in UX design, wireframing, and prototyping. Driven by a passion
+              for crafting experiences that matter, I left a stable career to
+              pursue what I love—creating digital solutions that are both
+              intuitive and impactful. My expertise in user interface, user
               research, enterprise, mobile, and web design.
             </span>
           </div>

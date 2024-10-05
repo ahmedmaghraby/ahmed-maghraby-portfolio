@@ -3,6 +3,6 @@
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  transform: translate(0px, 50px) skew(9deg, 8deg);
+  /* transform: translate(0px, 50px) skew(9deg, 8deg); */
 
 }
