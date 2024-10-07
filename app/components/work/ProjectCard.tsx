@@ -28,7 +28,7 @@ const ProjectCard = ({
       <div className="flex flex-row items-center justify-between">
         <AnimatedTitle
           text={name}
-          className={`${Roboto.className} text-lg font-semibold leading-none text-t-color md:text-xl lg:text-2xl`}
+          className={`${Roboto.className} text-lg font-semibold leading-none max-w-[50%] md:max-w-max text-t-color md:text-xl lg:text-2xl`}
           wordSpace={"mr-[0.25em]"}
           charSpace={"-mr-[0.01em]"}
         />
@@ -39,7 +39,7 @@ const ProjectCard = ({
                 href={demo}
                 target="_blank"
                 aria-label="Open Live Demo"
-                className="text-sm font-light caseStudy md:text-md text-t-color lg:text-lg"
+                className="text-xs font-light caseStudy md:pr-4 md:text-md text-t-color lg:text-lg"
                 data-no-blobity
               >
                 Case Study
@@ -77,8 +77,8 @@ const ProjectCard = ({
 
       <AnimatedBody
         text={description}
-        className={
-          "md:text-md max-w-full pr-10 text-sm font-light text-t-color lg:text-lg "
+        className={ 
+          `${Roboto.className} md:text-md max-w-full md:pr-10 text-sm font-light text-t-color lg:text-lg `
         }
       />
 

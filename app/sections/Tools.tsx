@@ -65,7 +65,7 @@ const Tools = () => {
                     data-blobity-magnetic="false"
                   >
                     <Image
-                      className="cursor-pointer-custom w-[250px] brands-Img object-cover "
+                      className="cursor-pointer-custom w-[250px] object-cover "
                       src={tool?.img || ""}
                       alt={tool?.name || ""}
                       width={150}

@@ -24,12 +24,12 @@ const Contact = () => {
           <AnimatedWords
             title={"Find me!"}
             style={
-              "flex flex-col items-start text-left font-extrabold uppercase leading-[0.9em] text-secondary text-[18vw] sm:max-w-full sm:flex-row sm:items-center sm:justify-center text-center "
+              "flex text-left font-extrabold uppercase leading-[0.9em] text-secondary text-[18vw] flex-row items-center justify-center text-center "
             }
           />
         </div>
 
-        <div className="mt-20 flex w-full flex-col items-end justify-center gap-16 sm:mt-32 sm:gap-12 md:mt-40 md:flex-row md:items-start md:justify-between lg:mt-12 lg:max-w-[1440px]">
+        <div className="mt-20 flex w-full flex-col items-center justify-center gap-16 sm:mt-32 sm:gap-12 md:mt-40 md:flex-row md:items-start md:justify-between lg:mt-12 lg:max-w-[1440px]">
           <div className="flex flex-col items-center text-base font-semibold text-center uppercase text-main md:items-start md:text-left">
             <AnimatedBody
               text={"Let's create something amazing together. Contact me!"}
@@ -52,7 +52,7 @@ const Contact = () => {
 
           <div className="flex flex-col items-center justify-center w-full font-bold text-main md:flex-row md:justify-between ">
             <Link
-              href="https://www.linkedin.com/in/amaghraby/"
+              href="https://www.linkedin.com/in/moe-uix"
               target="_blank"
               aria-label="View my linkedin Profile"
             >

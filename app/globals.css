@@ -171,7 +171,6 @@ body {
 .caseStudy {
   position: relative;
   display: inline-block;
-  padding-right: 1rem;
   cursor: url(https://cdn.custom-cursor.com/db/7599/32/stain-of-paint-pointer.png)   , pointer !important
 }
 .caseStudy:after {

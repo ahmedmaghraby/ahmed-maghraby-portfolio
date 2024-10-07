@@ -49,12 +49,12 @@ const About = () => {
             "mb-10 text-left text-xl font-light tracking-tighter text-[#e4ded7] sm:text-2xl md:mb-16 lg:text-4xl"
           }
         >
-          Driven by <br />
+          Driven by <br  className="md:none md:block"/>
           Curiosity.
           <br />
           Guided by
-          <br />
-          Purpose
+          <br  className="md:none md:block"/>
+          Purpose.
         </h2>
 
         <div
