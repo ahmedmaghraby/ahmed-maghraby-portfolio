@@ -5,7 +5,8 @@ import gsap from "gsap";
 import SplitType from "split-type";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { Roboto } from "../helper/font";
+import { lex } from "../helper/lex";
+
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const About = () => {
@@ -46,22 +47,22 @@ const About = () => {
       <div className="mx-auto grid w-[90%] grid-cols-1  flex-row items-center justify-center md:grid-cols-3 lg:max-w-[1212.8px]">
         <h2
           className={
-            "mb-10 text-left text-xl font-light tracking-tighter text-[#e4ded7] sm:text-2xl md:mb-16 lg:text-4xl"
+            ` ${lex.className} mb-10 text-left text-xl font-light tracking-tighter text-[#e4ded7] sm:text-2xl md:mb-16 lg:text-4xl`
           }
         >
-          Driven by <br  className="md:none md:block"/>
+          Driven by <br  className="hidden md:block" ></br>
           Curiosity.
           <br />
           Guided by
-          <br  className="md:none md:block"/>
+          <br  className="hidden md:block"></br>
           Purpose.
         </h2>
 
         <div
-          className={`${Roboto.className} mx-auto col-span-2 flex w-[100%]`}
+          className={` mx-auto col-span-2 flex w-full`}
           ref={container as React.RefObject<HTMLDivElement>}
         >
-          <div className="content mb-10 flex w-[100%] flex-col gap-4 text-lg  font-light leading-relaxed tracking-wide text-t-color md:mb-16 md:gap-6 md:text-lg md:leading-relaxed  lg:mb-16 lg:text-xl">
+          <div className="flex flex-col w-full gap-4 mb-10 text-lg font-light leading-relaxed tracking-wide content text-t-color md:mb-16 md:gap-6 md:text-lg md:leading-relaxed lg:mb-16 lg:text-xl">
             <span className="span">
               I'm Mohammed Ali an Egyptian product designer with over{" "} {new Date().getFullYear() - 2020} years of experience,specializing in UX design, wireframing, and prototyping. Driven by a passion
               for crafting experiences that matter, I left a stable career to

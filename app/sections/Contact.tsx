@@ -19,7 +19,7 @@ const Contact = () => {
       <ContactBackground />
       <div className="mx-auto  flex w-[90%] flex-col items-center justify-center pt-10 md:pt-0">
         <div
-          className={`flex flex-col items-start justify-center relative w-full sm:items-center lg:max-w-[1440px] `}
+          className={`flex flex-col items-center justify-center relative w-full sm:items-center lg:max-w-[1440px] `}
         >
           <AnimatedWords
             title={"Find me!"}
@@ -38,7 +38,7 @@ const Contact = () => {
               }
             />
             <Link
-              href="mailto:ahmedhamdy078@gmail.com"
+              href="mailto:moalicreates@gmail.com"
               target="_blank"
               aria-label="Send me an email"
               className="flex-1 mt-1 text-center underline underline-offset-2 hover:no-underline sm:mt-2 lg:mt-4 lg:text-left"
@@ -64,19 +64,19 @@ const Contact = () => {
               />
             </Link>
             <Link
-              href="https://github.com/ahmedmaghraby"
+              href="https://dribbble.com/Moe_uix"
               target="_blank"
               aria-label="View GitHub MyProfile"
             >
               <AnimatedTitle
-                text={"GITHUB"}
+                text={"DRIBBBLE"}
                 className={"text-base cursor-pointer font-bold text-main"}
                 wordSpace={"mr-[0.25em]"}
                 charSpace={"mr-[0.01em]"}
               />
             </Link>
             <Link
-              href="https://calendar.app.google/rPaupi1Yd5vjJahRA"
+              href="https://calendar.app.google/VowhPpYGdxPHtSvc8"
               target="_blank"
               aria-label="Book a meeting with me"
             >

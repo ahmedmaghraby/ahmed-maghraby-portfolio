@@ -1,13 +1,12 @@
 import "./globals.css";
 import React, { ReactNode } from "react";
 import type { Metadata } from "next";
-import { Lexend_Tera } from "next/font/google";
+import { Raleway } from "next/font/google";
 
-const font = Lexend_Tera({
-  subsets: ["latin"],
-  display: "block",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800"],
-});
+export const Roboto = Raleway({  
+    subsets: ["latin"],
+    weight: ['100','200','300',"400", "500", "600", "700", "800"],
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://moalicreates.com"),
@@ -97,7 +96,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body
-        className={`${font.className} scroll-smooth scrollbar-none scrollbar-track-[#0E1016] scrollbar-thumb-[#212531]`}
+        className={`${Roboto.className} scroll-smooth scrollbar-none scrollbar-track-[#0E1016] scrollbar-thumb-[#212531]`}
       >
         {children}
       </body>

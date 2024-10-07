@@ -103,7 +103,6 @@ body {
   color: #bfbfbf;
   text-align: left;
   width: fit-content;
-  margin: 0 auto;
   overflow: hidden;
 }
 .content__line {
@@ -129,7 +128,6 @@ body {
 .contact {
   width: 100%;
   padding: 5rem 0 8rem;
-  margin-top: -3px;
   border-radius: 0 0 2rem 2rem;
   background-color: #0e1016;
   overflow: hidden;
