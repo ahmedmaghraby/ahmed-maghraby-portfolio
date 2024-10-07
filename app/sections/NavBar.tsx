@@ -40,9 +40,10 @@ const NavBar = () => {
         scrolled ? "nav-scrolled" : ""
       } nowrap top-30 fixed left-0 right-0 z-50 mx-auto  my-0 flex items-center justify-center gap-1 rounded-lg px-1 py-2 text-main md:p-2`}
     >
-      <svg
-        width="31"
-        height="45"
+      <svg 
+        className="mx-2 sm:mx-4"
+        width="24"
+        height="31"
         viewBox="0 0 24 31"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

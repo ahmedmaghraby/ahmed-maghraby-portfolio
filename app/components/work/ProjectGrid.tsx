@@ -12,7 +12,7 @@ const ProjectGrid = () => {
       if (error) {
         console.log(error);
       } else {
-        const res = result;
+        const res = result?.sort((a,b)=> Number(a.id) - Number(b.id));
         console.log(res);
 
         setProjects(res ? res: []);
