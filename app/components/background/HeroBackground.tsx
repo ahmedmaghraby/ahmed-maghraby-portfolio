@@ -15,7 +15,7 @@ const ParticlesComponent: React.FC = () => {
   const particlesLoaded = useCallback(async () => {}, []);
   return (
     <Particles
-      className="h-screen w-full"
+      className="w-full h-screen"
       init={particlesInit}
       loaded={particlesLoaded}
       options={{
@@ -80,7 +80,7 @@ const ParticlesComponent: React.FC = () => {
             value: 0.5,
           },
           shape: {
-            type: "circle",
+            type: "star",
           },
           size: {
             value: { min: 1, max: 5 },

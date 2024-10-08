@@ -51,7 +51,7 @@ const EmailScroller: React.FC = () => {
   );
 
   return (
-    <section ref={contactRef} className="my-8 contact" data-scroll-section>
+    <section ref={contactRef} className="contact" data-scroll-section>
       <span>
         <span className={`${Roboto.className} contact__email`}>
           {[...Array(rowsCount)].map((_, rowIndex) => (

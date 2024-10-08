@@ -34,7 +34,7 @@ const Tools = () => {
 
   return (
     <section
-      className="relative z-10 w-full items-center justify-center overflow-hidden bg-[#0E1016]
+      className="relative z-10 py-12  w-full items-center justify-center overflow-hidden bg-[#0E1016]
        bg-cover bg-center pt-16  md:pt-20 lg:pt-20"
       id="tools"
     >
@@ -65,7 +65,7 @@ const Tools = () => {
                     data-blobity-magnetic="false"
                   >
                     <Image
-                      className="cursor-pointer-custom w-[250px] object-cover "
+                      className="cursor-pointer-custom w-[250px] object-cover opacity-70 hover:opacity-100"
                       src={tool?.img || ""}
                       alt={tool?.name || ""}
                       width={150}

@@ -1,11 +1,11 @@
 import "./globals.css";
 import React, { ReactNode } from "react";
 import type { Metadata } from "next";
-import { Raleway } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 
-export const Roboto = Raleway({  
-    subsets: ["latin"],
-    weight: ['100','200','300',"400", "500", "600", "700", "800"],
+export const Roboto = DM_Sans({  
+  subsets: ["latin"],
+  weight: ['400', '500' ,'700'],
 })
 
 export const metadata: Metadata = {

@@ -71,7 +71,9 @@ const ProjectCard = ({
             )}
           </>
         ) : (
-          <div></div>
+          <span className="text-xs font-light md:pr-4 md:text-md text-t-color lg:text-lg">
+            COMING SOON
+          </span>
         )}
       </div>
 

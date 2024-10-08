@@ -16,7 +16,7 @@ export default async function getProjects(path: string) {
       id: doc.id,
     }));
 
-    result = data;
+    result = data as any[];
     console.log(result);
   } catch (e) {
     error = e;

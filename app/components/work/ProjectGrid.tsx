@@ -12,10 +12,16 @@ const ProjectGrid = () => {
       if (error) {
         console.log(error);
       } else {
-        const res = result?.sort((a,b)=> Number(a.id) - Number(b.id));
+        const res = result?.sort((a, b) => {
+          if (Number(a.sortId) > Number(b?.sortId)) {
+            return 1;
+          } else {
+            return -1;
+          }
+        });
         console.log(res);
 
-        setProjects(res ? res: []);
+        setProjects(res ? res : []);
       }
     });
   }, []);
@@ -23,10 +29,9 @@ const ProjectGrid = () => {
   return (
     <>
       <div className="mb-10 flex gap-16 text-[#e4ded7] md:mb-16  lg:mb-20 ">
-      <AnimatedTitle
+        <AnimatedTitle
           text={"Selected Work"}
-          className={`${Roboto.className} font-light text-lg md:text-xl lg:text-2xl text-t-color}`}
-
+          className={`${Roboto.className} text-t-color} text-lg font-light md:text-xl lg:text-2xl`}
           wordSpace={"mr-[8px]"}
           charSpace={"mr-[0.001em]"}
         />
