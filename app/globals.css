@@ -128,7 +128,6 @@ body {
 .contact {
   width: 100%;
   padding: 5rem 0 8rem;
-  border-radius: 0 0 2rem 2rem;
   background-color: #0E1016;
   overflow: hidden;
   pointer-events: all;
@@ -165,7 +164,9 @@ body {
 .brands-Img {
   filter: invert(0.9) sepia(1) saturate(16) hue-rotate(309deg) brightness(1);
 }
-
+.hoverPointer {
+  cursor: url(https://cdn.custom-cursor.com/db/7599/32/stain-of-paint-pointer.png)   , pointer !important
+}
 .caseStudy {
   position: relative;
   display: inline-block;

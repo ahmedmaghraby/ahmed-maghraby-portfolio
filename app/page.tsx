@@ -15,7 +15,7 @@ import Footer from "./sections/Footer.tsx";
 import Tools from "./sections/Tools.tsx";
 import EmailScroller from "./sections/EmailScroller.tsx";
 import BookMeeting from "./sections/BookMeeting.tsx";
-import Banner from "./components/other/plastine.tsx";
+// import Banner from "./components/other/plastine.tsx";
 
 
 export default function Home() {
@@ -59,7 +59,7 @@ export default function Home() {
     return (
         <>
             <GsapTimelineProvider>
-             <Banner />
+             {/* <Banner /> */}
             <PreLoader />
             <NavBar />
             <main

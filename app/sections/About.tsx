@@ -64,7 +64,7 @@ const About = () => {
         >
           <div className="flex flex-col w-full gap-4 mb-10 text-lg font-light leading-relaxed tracking-wide content text-t-color md:mb-16 md:gap-6 md:text-lg md:leading-relaxed lg:mb-16 lg:text-xl">
             <span className="span">
-              I'm Mohammed Ali an Egyptian product designer with over{" "} {new Date().getFullYear() - 2020} years of experience,specializing in UX design, wireframing, and prototyping. Driven by a passion
+              I'm Mohammed Ali an Egyptian product designer with over{" "} {new Date().getFullYear() - 2020} years of experience, specializing in UX design, wireframing, and prototyping. Driven by a passion
               for crafting experiences that matter, I left a stable career to
               pursue what I love—creating digital solutions that are both
               intuitive and impactful. My expertise in user interface, user

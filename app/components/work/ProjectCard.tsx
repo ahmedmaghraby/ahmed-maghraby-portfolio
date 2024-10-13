@@ -21,14 +21,14 @@ const ProjectCard = ({
 }: ProjectProps) => {
   return (
     <motion.div
-      className={`relative z-10  flex w-full flex-col items-stretch justify-center gap-4 py-0 md:gap-6 lg:gap-8 `}
+      className={`relative z-10 flex w-full flex-col items-stretch justify-center gap-4 py-0 pb-20 md:gap-6 lg:gap-8 `}
       initial="initial"
       animate="animate"
     >
       <div className="flex flex-row items-center justify-between">
         <AnimatedTitle
           text={name}
-          className={`${Roboto.className} text-lg font-semibold leading-none max-w-[50%] md:max-w-max text-t-color md:text-xl lg:text-2xl`}
+          className={`${Roboto.className} max-w-[50%] text-lg font-semibold leading-none text-t-color md:max-w-max md:text-xl lg:text-2xl`}
           wordSpace={"mr-[0.25em]"}
           charSpace={"-mr-[0.01em]"}
         />
@@ -39,7 +39,7 @@ const ProjectCard = ({
                 href={demo}
                 target="_blank"
                 aria-label="Open Live Demo"
-                className="text-xs font-light caseStudy md:pr-4 md:text-md text-t-color lg:text-lg"
+                className="text-xs font-light caseStudy md:text-md text-t-color md:pr-4 lg:text-lg"
                 data-no-blobity
               >
                 Case Study
@@ -71,7 +71,7 @@ const ProjectCard = ({
             )}
           </>
         ) : (
-          <span className="text-xs font-light md:pr-4 md:text-md text-t-color lg:text-lg">
+          <span className="text-xs font-light md:text-md text-t-color md:pr-4 lg:text-lg">
             COMING SOON
           </span>
         )}
@@ -79,19 +79,35 @@ const ProjectCard = ({
 
       <AnimatedBody
         text={description}
-        className={ 
-          `${Roboto.className} md:text-md max-w-full md:pr-10 text-sm font-light text-t-color lg:text-lg `
-        }
+        className={`${Roboto.className} md:text-md max-w-full text-sm font-light text-t-color md:pr-10 lg:text-lg `}
       />
-
-      <Image
-        src={image}
-        alt={name}
-        className={`w-full`}
-        width={10}  
-        height={10}
-        priority={true}
-      />
+      {demo ? (
+        <Link
+          href={demo}
+          target="_blank"
+          aria-label="Open Live Demo"
+          className="text-xs font-light hoverPointer md:text-md text-t-color md:pr-4 lg:text-lg"
+          data-no-blobity
+        >
+          <Image
+            src={image}
+            alt={name}
+            className={`w-full`}
+            width={10}
+            height={10}
+            priority={true}
+          />
+        </Link>
+      ) : (
+        <Image
+          src={image}
+          alt={name}
+          className={`w-full`}
+          width={10}
+          height={10}
+          priority={true}
+        />
+      )}
       {/* <Container
         width="100%"
         height="100%"

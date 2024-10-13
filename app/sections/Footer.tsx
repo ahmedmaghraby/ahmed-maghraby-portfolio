@@ -13,7 +13,7 @@ const Footer = () => {
         >
             <motion.div className={`${Roboto.className} mx-auto flex w-[90%] flex-row items-center justify-end text-center text-base text-main `}>
                 <AnimatedBody
-                    text={"© Mo Ali," + new Date().getFullYear()}
+                    text={"© Mo Ali" + new Date().getFullYear()}
                     className={"m-0 p-0"}
                 />
             </motion.div>
