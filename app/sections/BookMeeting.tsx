@@ -51,7 +51,7 @@ const BookMeeting: React.FC = () => {
   );
 
   return (
-    <section ref={contactRef} className="contact" data-scroll-section>
+    <section ref={contactRef} className="z-10 contact" data-scroll-section>
       <span>
         <span className={"contact__email"}>
           {[...Array(rowsCount)].map((_, rowIndex) => (

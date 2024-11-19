@@ -1,12 +1,12 @@
 import "./globals.css";
 import React, { ReactNode } from "react";
 import type { Metadata } from "next";
-import { Rubik } from "next/font/google";
+import { DM_Sans } from "next/font/google";
 
-const font = Rubik({
+const font = DM_Sans({
     subsets: ["latin"],
     display: "block",
-    weight: ["400", "500", "600", "700", "800"],
+    weight: ["400", "500", "700",],
 });
 
 export const metadata: Metadata = {
@@ -15,6 +15,9 @@ export const metadata: Metadata = {
     description:`I'm Ahmed Maghraby and I'm a software engineer with ${new Date().getFullYear() - 2018} years of experience.`,
     generator: "Next.js",
     applicationName: "Maghraby's Portfolio",
+    verification: {
+        google: "RJzthQ70VJKXHPDZsjqRIT21jlkx6N7AfA0IlrbSsEU",
+    },
     keywords: [
         "Ahmed Maghraby",
         "maghraby",

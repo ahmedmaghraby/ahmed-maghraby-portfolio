@@ -4,7 +4,7 @@ import React from "react";
 const Work = () => {
     return (
         <section
-            className="relative z-10 flex w-full flex-col items-center justify-center bg-[#0E1016] bg-cover bg-center py-16 md:py-20 lg:py-20"
+            className="relative z-10 flex flex-col items-center justify-center w-full py-16 bg-center bg-cover md:py-20 lg:py-20"
             id="work"
         >
 

@@ -102,7 +102,7 @@ body {
   color: #bfbfbf;
   text-align: left;
   width: fit-content;
-  max-width: 30ch;
+  max-width:56ch;
   margin: 0 auto;
   overflow: hidden;
 }
@@ -114,9 +114,13 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: rgb(14 16 22);
+  background-color: rgb(14 16 22/.5);
   opacity: 0.825;
   transform: translateX(var(--overlay-offset, 0%));
+}
+.nav-scrolled {
+  background: rgb(33, 37, 48 0);
+  backdrop-filter: saturate(1.8) blur(20px);
 }
 @media (prefers-color-scheme: light) {
   .content {
@@ -129,10 +133,8 @@ body {
   padding: 5rem 0 8rem;
   margin-top: -3px;
   border-radius: 0 0 2rem 2rem;
-  background-color: #0e1016;
   overflow: hidden;
   pointer-events: all;
-  box-shadow: 0 2rem 1.125rem -1.125rem rgba(235, 235, 235, 0.0875);
 }
 
 .contact__email {
@@ -143,6 +145,62 @@ body {
   text-decoration: none;
   cursor: none;
 }
+
+
+.cursor-pointer-custom{
+  cursor: url(https://cdn.custom-cursor.com/db/7599/32/stain-of-paint-pointer.png)   , pointer !important
+
+}
+
+.brands-Img {
+  filter: invert(0.9) sepia(1) saturate(16) hue-rotate(309deg) brightness(1);
+}
+.hoverPointer {
+  cursor: url(https://cdn.custom-cursor.com/db/7599/32/stain-of-paint-pointer.png)   , pointer !important
+}
+.caseStudy {
+  position: relative;
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid #e68e2e;
+  padding: 8px 16px;
+  z-index: 5;
+  background: linear-gradient(306deg,#e68e2e, #f5d393);
+  background-size: 0%;
+  cursor: url(https://cdn.custom-cursor.com/db/7599/32/stain-of-paint-pointer.png)   , pointer !important
+}
+
+.caseStudy:hover {
+  color: #0E1016;
+  background-size: 100%;
+  transition: background-size .3s ease-out;
+  transition: color .3s ease-in-out
+}
+/* .caseStudy:before {
+  content: "";
+  position: absolute;
+  left:0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: linear-gradient(306deg,#e68e2e, #f5d393);
+  transition: width .3s ease-in-out;
+} */
+.caseStudy:hover:before {
+  width: 100%;
+}
+/* .caseStudy .arrow-icon {
+  position: absolute;
+  bottom: -1rem;
+  right: 1rem;
+  opacity: 0;
+  fill: #fff;
+}
+.caseStudy:hover .arrow-icon{
+  opacity: 1;
+  transform:  translate( 20px, -20px);
+  transition: all .3s ease-in-out;
+} */
 
 .contact__email__row {
   display: block;
@@ -160,11 +218,5 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .contact__email {
     cursor: pointer;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  .contact {
-    box-shadow: 0 2rem 0.75rem -1rem rgba(3, 3, 3, 0.025);
   }
 }

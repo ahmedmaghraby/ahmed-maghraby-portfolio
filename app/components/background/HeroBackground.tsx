@@ -15,14 +15,14 @@ const ParticlesComponent: React.FC = () => {
   const particlesLoaded = useCallback(async () => {}, []);
   return (
     <Particles
-      className="h-screen w-full"
+      className="w-full h-screen"
       init={particlesInit}
       loaded={particlesLoaded}
       options={{
         fullScreen: { enable: false },
         background: {
           color: {
-            value: "#0E1016",
+            value:  "transparent",
           },
         },
         fpsLimit: 120,

@@ -13,6 +13,7 @@ module.exports = {
       colors: {
         'bg-dark': '#0e1016',
         't-color':'#e5ebf2',
+        cover50:'rgb(14 16 22 / 0.5)',
         main: '#f5d393',
         secondary: '#e68e2e',
       },

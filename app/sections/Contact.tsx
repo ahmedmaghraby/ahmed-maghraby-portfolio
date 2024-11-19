@@ -18,12 +18,12 @@ const Contact = () => {
       <ContactBackground />
       <div className="mx-auto  flex w-[90%] flex-col items-center justify-center pt-10 md:pt-0">
         <div
-          className={`flex flex-col items-start justify-center relative w-full sm:items-center lg:max-w-[1440px] `}
+          className={`relative flex w-full flex-col items-center justify-center sm:items-center lg:max-w-[1440px] `}
         >
           <AnimatedWords
-            title={"contact"}
+            title={"Find me!"}
             style={
-              "flex flex-col items-start text-left font-extrabold uppercase leading-[0.9em] text-secondary text-[20vw] sm:max-w-full sm:flex-row sm:items-center sm:justify-center text-center "
+              "flex text-left font-extrabold uppercase leading-[0.9em] text-secondary text-[18vw] flex-row items-center justify-center text-center "
             }
           />
         </div>
@@ -44,7 +44,7 @@ const Contact = () => {
             >
               <AnimatedBody
                 text={"Send me an email"}
-                className={"text-center cursor-pointer lg:text-left"}
+                className={"cursor-pointer text-center lg:text-left"}
               />
             </Link>
           </div>
@@ -56,8 +56,8 @@ const Contact = () => {
               aria-label="View my linkedin Profile"
             >
               <AnimatedTitle
-              text={"LINKEDIN"}
-                className={"text-base cursor-pointer font-bold text-main"}
+                text={"LINKEDIN"}
+                className={"cursor-pointer text-base font-bold text-main"}
                 wordSpace={"mr-[0.25em]"}
                 charSpace={"mr-[0.01em]"}
               />
@@ -69,7 +69,7 @@ const Contact = () => {
             >
               <AnimatedTitle
                 text={"GITHUB"}
-                className={"text-base cursor-pointer font-bold text-main"}
+                className={"cursor-pointer text-base font-bold text-main"}
                 wordSpace={"mr-[0.25em]"}
                 charSpace={"mr-[0.01em]"}
               />
@@ -81,7 +81,7 @@ const Contact = () => {
             >
               <AnimatedTitle
                 text={"CALENDAR"}
-                className={"text-base cursor-pointer font-bold text-main"}
+                className={"cursor-pointer text-base font-bold text-main"}
                 wordSpace={"mr-[0.25em]"}
                 charSpace={"mr-[0.01em]"}
               />
