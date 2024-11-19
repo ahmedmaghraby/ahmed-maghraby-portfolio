@@ -42,8 +42,10 @@ const ProjectCard = ({
                 className="text-xs font-light caseStudy md:text-md text-t-color md:pr-4 lg:text-lg"
                 data-no-blobity
               >
-                Case Study
-                <svg
+                <span className="z-10">
+                  Case Study
+                </span>
+                {/* <svg
                   width="15"
                   height="15"
                   viewBox="0 0 10 10"
@@ -66,7 +68,7 @@ const ProjectCard = ({
                     stroke-linecap="round"
                     stroke-linejoin="round"
                   />
-                </svg>
+                </svg> */}
               </Link>
             )}
           </>
