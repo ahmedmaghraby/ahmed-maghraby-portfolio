@@ -69,9 +69,10 @@ export default function Home() {
             >
                 <Hero />
                 <About />
-                <BookMeeting />
-                <Work />
                 <Services />
+                <Work />
+                <BookMeeting />
+
                 <Tools />
                 <EmailScroller />
                 <Contact />

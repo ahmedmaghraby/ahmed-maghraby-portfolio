@@ -1,6 +1,21 @@
 
+/**
+ * The function initializes a fluid simulation using WebGL for interactive splatting and advection
+ * effects.
+ * @returns The code snippet provided is a JavaScript function that initializes a fluid simulation
+ * using WebGL. The function sets up various configurations and shaders for simulating fluid dynamics,
+ * including advection, divergence, curl, pressure, and splatting. It also handles user inputs for
+ * interacting with the simulation, such as mouse clicks and touch events.
+ */
+/**
+ * The function initializes a fluid simulation using WebGL for interactive splatting and advection
+ * effects.
+ * @returns The code snippet provided is a JavaScript function that initializes a fluid simulation
+ * using WebGL. The function sets up various configurations and shaders for simulating fluid dynamics,
+ * including advection, divergence, curl, pressure, and splatting. It also handles user inputs for
+ * interacting with the simulation, such as mouse clicks and touch events.
+ */
 const initCursor = () => {
-  // anim setup || in an active project you can set this to the html body. however ive found a bound box to the viewport looks + performs better
   const canvas = document.getElementById('fluid');
   resizeCanvas();
 
@@ -14,14 +29,14 @@ const initCursor = () => {
     PRESSURE: 0.1,
     PRESSURE_ITERATIONS: 20,
     CURL: 3,
-    SPLAT_RADIUS: 0.6,
+    SPLAT_RADIUS: 0.2,
     SPLAT_FORCE: 6500,
-    SHADING: true,
+    SHADING: false,
     // COLOR_UPDATE_SPEED: 1000,
     COLOR_UPDATE_SPEED: 10,
     PAUSED: false,
     BACK_COLOR: { r: 0, g: 0, b: 0 },
-    TRANSPARENT: true,
+    TRANSPARENT: false,
   };
 
   function pointerPrototype() {
@@ -238,47 +253,6 @@ const initCursor = () => {
 `,
   );
 
-  const blurVertexShader = compileShader(
-    gl.VERTEX_SHADER,
-    `
-    precision highp float;
-
-    attribute vec2 aPosition;
-    varying vec2 vUv;
-    varying vec2 vL;
-    varying vec2 vR;
-    uniform vec2 texelSize;
-
-    void main () {
-        vUv = aPosition * 0.5 + 0.5;
-        float offset = 1.33333333;
-        vL = vUv - texelSize * offset;
-        vR = vUv + texelSize * offset;
-        gl_Position = vec4(aPosition, 0.0, 1.0);
-    }
-`,
-  );
-
-  const blurShader = compileShader(
-    gl.FRAGMENT_SHADER,
-    `
-    precision mediump float;
-    precision mediump sampler2D;
-
-    varying vec2 vUv;
-    varying vec2 vL;
-    varying vec2 vR;
-    uniform sampler2D uTexture;
-
-    void main () {
-        vec4 sum = texture2D(uTexture, vUv) * 0.29411764;
-        sum += texture2D(uTexture, vL) * 0.35294117;
-        sum += texture2D(uTexture, vR) * 0.35294117;
-        gl_FragColor = sum;
-    }
-`,
-  );
-
   const copyShader = compileShader(
     gl.FRAGMENT_SHADER,
     `
@@ -306,19 +280,6 @@ const initCursor = () => {
 
     void main () {
         gl_FragColor = value * texture2D(uTexture, vUv);
-    }
-`,
-  );
-
-  const colorShader = compileShader(
-    gl.FRAGMENT_SHADER,
-    `
-    precision mediump float;
-
-    uniform vec4 color;
-
-    void main () {
-        gl_FragColor = color;
     }
 `,
   );
@@ -600,21 +561,14 @@ const initCursor = () => {
     };
   })();
 
-  function CHECK_FRAMEBUFFER_STATUS() {
-    let status = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
-    if (status != gl.FRAMEBUFFER_COMPLETE) console.trace('Framebuffer error: ' + status);
-  }
-
   let dye;
   let velocity;
   let divergence;
   let curl;
   let pressure;
 
-  const blurProgram = new Program(blurVertexShader, blurShader);
   const copyProgram = new Program(baseVertexShader, copyShader);
   const clearProgram = new Program(baseVertexShader, clearShader);
-  const colorProgram = new Program(baseVertexShader, colorShader);
   const splatProgram = new Program(baseVertexShader, splatShader);
   const advectionProgram = new Program(baseVertexShader, advectionShader);
   const divergenceProgram = new Program(baseVertexShader, divergenceShader);
@@ -739,38 +693,6 @@ const initCursor = () => {
     target.texelSizeX = 1.0 / w;
     target.texelSizeY = 1.0 / h;
     return target;
-  }
-
-  function createTextureAsync(url) {
-    let texture = gl.createTexture();
-    gl.bindTexture(gl.TEXTURE_2D, texture);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.REPEAT);
-    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.REPEAT);
-    gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, 1, 1, 0, gl.RGB, gl.UNSIGNED_BYTE, new Uint8Array([255, 255, 255]));
-
-    let obj = {
-      texture,
-      width: 1,
-      height: 1,
-      attach(id) {
-        gl.activeTexture(gl.TEXTURE0 + id);
-        gl.bindTexture(gl.TEXTURE_2D, texture);
-        return id;
-      },
-    };
-
-    let image = new Image();
-    image.onload = () => {
-      obj.width = image.width;
-      obj.height = image.height;
-      gl.bindTexture(gl.TEXTURE_2D, texture);
-      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, image);
-    };
-    image.src = url;
-
-    return obj;
   }
 
   function updateKeywords() {
@@ -1078,6 +1000,8 @@ const initCursor = () => {
     c.r *= 0.15;
     c.g *= 0.15;
     c.b *= 0.15;
+    // console.log(c);
+    
     return c;
   }
 
@@ -1089,32 +1013,48 @@ const initCursor = () => {
     q = v * (1 - f * s);
     t = v * (1 - (1 - f) * s);
 
+    // switch (i % 6) {
+    //   case 0:
+    //     (r = v), (g = t), (b = p);
+    //     break;
+    //   case 1:
+    //     (r = q), (g = v), (b = p);
+    //     break;
+    //   case 2:
+    //     (r = p), (g = v), (b = t);
+    //     break;
+    //   case 3:
+    //     (r = p), (g = q), (b = v);
+    //     break;
+    //   case 4:
+    //     (r = t), (g = p), (b = v);
+    //     break;
+    //   case 5:
+    //     (r = v), (g = p), (b = q);
+    //     break;
+    // }
     switch (i % 6) {
       case 0:
-        (r = v), (g = t), (b = p);
+        return {r: 0.96, g: 0.827, b: 0.576};
         break;
       case 1:
-        (r = q), (g = v), (b = p);
+        return {r: 0.902, g: 0.557, b: 0.180};
         break;
       case 2:
-        (r = p), (g = v), (b = t);
+        return {r: 0.961, g: 0.827, b: 0.576};
         break;
       case 3:
-        (r = p), (g = q), (b = v);
+        return {r: 0.96, g: 0.827, b: 0.576};
         break;
       case 4:
-        (r = t), (g = p), (b = v);
+        return {r: 0.902, g: 0.557, b: 0.180};
         break;
       case 5:
-        (r = v), (g = p), (b = q);
+        return {r: 0.961, g: 0.827, b: 0.576};
         break;
     }
 
-    return {
-      r,
-      g,
-      b,
-    };
+    return {r, g, b};
   }
 
   function wrap(value, min, max) {

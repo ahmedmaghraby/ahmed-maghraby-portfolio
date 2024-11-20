@@ -9,7 +9,7 @@ const Hero = () => {
     useState<boolean>(false);
   return (
     <motion.section
-      className="relative z-20 flex h-[100vh] bg-cover50 w-full justify-center"
+      className="relative z-20 flex h-[100vh] w-full justify-center"
       id="home"
       initial="initial"
       animate="animate"
