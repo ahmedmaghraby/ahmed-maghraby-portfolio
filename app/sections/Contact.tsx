@@ -23,7 +23,7 @@ const Contact = () => {
           <AnimatedWords
             title={"Find me!"}
             style={
-              "flex text-left font-extrabold uppercase leading-[0.9em] text-secondary text-[18vw] flex-row items-center justify-center text-center "
+              "flex text-left font-extrabold uppercase leading-[1.1em] text-secondary text-[18vw] flex-row items-center justify-center text-center "
             }
           />
         </div>

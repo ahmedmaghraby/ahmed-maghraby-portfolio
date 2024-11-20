@@ -151,7 +151,20 @@ body {
   cursor: url(https://cdn.custom-cursor.com/db/7599/32/stain-of-paint-pointer.png)   , pointer !important
 
 }
-
+.contact__branding {
+  display: block;
+  position: relative;
+  color: #ccc; /* Darkened white by 40% */
+  line-height: 1;
+  text-decoration: none;
+}
+.contact__Branding__row {
+  display: block;
+  font-size: clamp(2.49rem, calc(1.37rem + 5.57vw), 4.34rem);
+  margin: 0;
+  white-space: nowrap;
+  will-change: transform;
+}
 .brands-Img {
   filter: invert(0.9) sepia(1) saturate(16) hue-rotate(309deg) brightness(1);
 }

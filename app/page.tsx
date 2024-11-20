@@ -17,6 +17,7 @@ import EmailScroller from "./sections/EmailScroller.tsx";
 import BookMeeting from "./sections/BookMeeting.tsx";
 import Banner from "./components/other/plastine.tsx";
 import ShadowCursor from "./components/ShadowCursor/index.tsx";
+import Services from "./sections/Services.tsx";
 
 
 export default function Home() {
@@ -70,6 +71,7 @@ export default function Home() {
                 <About />
                 <BookMeeting />
                 <Work />
+                <Services />
                 <Tools />
                 <EmailScroller />
                 <Contact />

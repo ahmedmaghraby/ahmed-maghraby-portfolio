@@ -1,0 +1,16 @@
+[debug] [2024-11-20T00:51:12.792Z] ----------------------------------------------------------------------
+[debug] [2024-11-20T00:51:12.793Z] Command:       /Users/ahmedmaghraby/.nvm/versions/node/v18.19.1/bin/node /Users/ahmedmaghraby/Library/pnpm/global/5/node_modules/firebase-tools/lib/bin/firebase.js deploy
+[debug] [2024-11-20T00:51:12.793Z] CLI Version:   13.25.0
+[debug] [2024-11-20T00:51:12.794Z] Platform:      darwin
+[debug] [2024-11-20T00:51:12.794Z] Node Version:  v18.19.1
+[debug] [2024-11-20T00:51:12.800Z] Time:          Wed Nov 20 2024 03:51:12 GMT+0300 (GMT+03:00)
+[debug] [2024-11-20T00:51:12.800Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-11-20T00:51:12.844Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-11-20T00:51:12.844Z] > authorizing via signed-in user (ahmedhamdy078@gmail.com)
+[debug] [2024-11-20T00:51:12.844Z] [iam] checking project ahmedmagraby-app for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2024-11-20T00:51:12.845Z] Checked if tokens are valid: true, expires at: 1732066975247
+[debug] [2024-11-20T00:51:12.846Z] Checked if tokens are valid: true, expires at: 1732066975247
+[debug] [2024-11-20T00:51:12.846Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/ahmedmagraby-app:testIamPermissions [none]
+[debug] [2024-11-20T00:51:12.846Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/ahmedmagraby-app:testIamPermissions x-goog-quota-user=projects/ahmedmagraby-app
+[debug] [2024-11-20T00:51:12.846Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/ahmedmagraby-app:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}

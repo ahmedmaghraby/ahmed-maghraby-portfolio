@@ -44,7 +44,7 @@ const About = () => {
       id="about"
       ref={about}
     >
-      <div className="grid flex-row items-center justify-center grid-cols-1 mx-auto md:grid-cols-3 lg:max-w-7xl">
+      <div className="grid flex-row items-center justify-center grid-cols-1 mx-auto max-w-[90%] md:grid-cols-3 lg:max-w-7xl">
         <h2
           className={` ${lex.className} mb-10 text-left text-xl font-light tracking-tighter text-[#e4ded7] sm:text-2xl md:mb-16 lg:text-4xl`}
         >

@@ -22,7 +22,7 @@ const ProjectCard = ({
 }: ProjectProps) => {
   return (
     <motion.div
-      className={`relative z-10 flex w-full flex-col items-stretch justify-center gap-4 py-0 pb-28`}
+      className={`relative z-10 flex w-full flex-col items-stretch justify-center gap-4 py-0 pb-12 lg:pb-28`}
       initial="initial"
       animate="animate"
     >
