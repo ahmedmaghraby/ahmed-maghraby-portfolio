@@ -4,17 +4,12 @@ import Image from "next/image";
 import AnimatedTitle from "../../animations/AnimatedTitle";
 import AnimatedBody from "../../animations/AnimatedBody";
 import { motion } from "framer-motion";
-import Container from "../container/Container";
 import React from "react";
-import { SiGithub } from "react-icons/si";
-import { BsLink45Deg } from "react-icons/bs";
-import { iconMapper } from "../../helper/iconMapper";
 import { lex } from "../../helper/lex";
 const ProjectCard = ({
   id,
   name,
   description,
-  techNames,
   github,
   demo,
   image,
@@ -22,7 +17,7 @@ const ProjectCard = ({
 }: ProjectProps) => {
   return (
     <motion.div
-      className={`relative z-10 flex w-full flex-col items-stretch justify-center gap-4 py-0 pb-12 lg:pb-28`}
+      className={`relative z-10 flex w-full flex-col items-stretch justify-center gap-4 py-0 pb-6 lg:pb-10`}
       initial="initial"
       animate="animate"
     >
@@ -54,38 +49,20 @@ const ProjectCard = ({
                 className="text-xs font-light caseStudy md:text-md text-t-color md:pr-4 lg:text-lg"
                 data-no-blobity
               >
-                <span className="z-10">Demo</span>
+                <span className="z-10">Preview</span>
               </Link>
             )}
           </div>
         ) : (
-          <span className="text-xs font-light md:text-md text-t-color md:pr-4 lg:text-lg">
-            NOT AVAILABLE
-          </span>
+          <> </>
         )}
       </div>
 
       <AnimatedBody
         text={description}
-        className={` md:text-md max-w-full text-sm font-light text-t-color md:pr-10 lg:text-lg `}
+        maxLgnth={245}
+        className={`md:text-md max-w-full text-sm font-light text-[#D9D9D9]  md:pr-10 lg:text-lg `}
       />
-      <div className="flex flex-row flex-wrap items-center justify-start mt-2 mb-2 gap-7">
-        {techNames.map((name, id) => (
-          <div key={id} className={"relative"}>
-            <Link
-              href={iconMapper(name).link}
-              target="_blank"
-              aria-label={`Learn more about ${name}`}
-              className="w-[20px] text-[20px] md:w-[25px] md:text-[24px] lg:w-[30px] lg:text-[28px]"
-              title={iconMapper(name).link}
-              data-blobity-tooltip={name}
-              data-blobity-magnetic="false"
-            >
-              {iconMapper(name).icon}
-            </Link>
-          </div>
-        ))}
-      </div>
       {demo ? (
         <Link
           href={demo}
@@ -97,7 +74,7 @@ const ProjectCard = ({
           <Image
             src={image}
             alt={name}
-            className={`w-full opacity-90`}
+            className={`w-full opacity-90 transition hover:skew-y-1 hover:scale-105 hover:saturate-100 `}
             width={10}
             height={10}
             priority={true}
@@ -107,7 +84,7 @@ const ProjectCard = ({
         <Image
           src={image}
           alt={name}
-          className={`w-full opacity-90`}
+          className={`w-full opacity-90 transition hover:skew-y-1 hover:scale-105 hover:saturate-100`}
           width={10}
           height={10}
           priority={true}
@@ -141,7 +118,7 @@ const ProjectCard = ({
     //       priority={true}
     //     />
     //     <div
-    //       className={`absolute top-0 text-[#0E1016] ${
+    //       className={`absolute top-0 text-bg-dark ${
     //         id % 2 === 0 ? "left-0 ml-8 lg:ml-14" : "right-0 mr-8 lg:mr-14"
     //       } mt-6 flex  items-center justify-center gap-4 lg:mt-10`}
     //     >

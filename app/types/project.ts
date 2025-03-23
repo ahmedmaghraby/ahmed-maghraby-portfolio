@@ -1,9 +1,7 @@
-
 export type ProjectProps = {
   id: number;
   name: string;
   description: string;
-  techNames: string[];
   github: string;
   demo: string;
   image: string;

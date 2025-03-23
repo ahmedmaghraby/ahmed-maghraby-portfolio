@@ -3,6 +3,7 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { start } from "repl";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
@@ -21,6 +22,8 @@ const BookMeeting: React.FC = () => {
 
         const scrollTriggerFactory = (trigger: RefObject<HTMLElement>) => ({
           trigger: trigger.current,
+          start: "top 80%",
+          end: "top top",
           scrub: window.innerWidth >= smoothScrollBreakPoint ? true : 0.5,
         });
 
@@ -35,7 +38,7 @@ const BookMeeting: React.FC = () => {
             animations.push(
               gsap.fromTo(
                 item,
-                { x: -window.innerWidth },
+                { x: -window.innerWidth * 2.5 },
                 { x: sumWidth, scrollTrigger }
               )
             );
@@ -51,7 +54,11 @@ const BookMeeting: React.FC = () => {
   );
 
   return (
-    <section ref={contactRef} className="z-10 contact" data-scroll-section>
+    <section
+      ref={contactRef}
+      className="z-10 py-20 contact"
+      data-scroll-section
+    >
       <span>
         <span className={"contact__email"}>
           {[...Array(rowsCount)].map((_, rowIndex) => (
@@ -61,8 +68,13 @@ const BookMeeting: React.FC = () => {
               className={"contact__email__row"}
             >
               {[...Array(textCount)].map((_, textKey) => (
-                <a key={textKey} href="https://calendar.app.google/rPaupi1Yd5vjJahRA" target="_blank" className={"contact__email__row__text"}>
-                  Schedule a meeting <span className={"serif"}>With me</span>
+                <a
+                  key={textKey}
+                  href="https://calendly.com/phoonix-info/30min"
+                  target="_blank"
+                  className={"contact__email__row__text"}
+                >
+                  Schedule a meeting <span className={"serif"}>With us</span>
                   {textKey !== textCount - 1 && <span>&nbsp; - &nbsp;</span>}
                 </a>
               ))}

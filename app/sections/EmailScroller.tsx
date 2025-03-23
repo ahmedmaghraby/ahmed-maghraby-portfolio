@@ -51,7 +51,11 @@ const EmailScroller: React.FC = () => {
   );
 
   return (
-    <section ref={contactRef} className="z-10 contact" data-scroll-section>
+    <section
+      ref={contactRef}
+      className="z-10 py-20 contact"
+      data-scroll-section
+    >
       <span>
         <span className={"contact__email"}>
           {[...Array(rowsCount)].map((_, rowIndex) => (
@@ -61,8 +65,12 @@ const EmailScroller: React.FC = () => {
               className={"contact__email__row"}
             >
               {[...Array(textCount)].map((_, textKey) => (
-                <a key={textKey} href="mailto:Ahmedhamdy078@gmail.com" className={"contact__email__row__text"}>
-                  Send me an <span className={"serif"}>email</span>
+                <a
+                  key={textKey}
+                  href="mailto:Info@phoonix.com"
+                  className={"contact__email__row__text"}
+                >
+                  Send us an <span className={"serif"}>email</span>
                   {textKey !== textCount - 1 && <span>&nbsp; - &nbsp;</span>}
                 </a>
               ))}

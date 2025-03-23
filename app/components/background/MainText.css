@@ -1,0 +1,16 @@
+@keyframes gradientRotate {
+  0% {
+    --angle: 0deg;
+  }
+  100% {
+    --angle: 360deg;
+  }
+}
+
+.typewriter {
+  background: linear-gradient(var(--angle), #fff 50%, #9ac2ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientRotate 7s alternate infinite;
+}

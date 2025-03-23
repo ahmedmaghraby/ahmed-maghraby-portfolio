@@ -4,7 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 
 const db = getFirestore(firebase_app);
 export default async function getTools() {
-  const collectionRef = collection(db, 'tools');
+  const collectionRef = collection(db, "test");
 
   let result = null;
   let error = null;
@@ -12,7 +12,8 @@ export default async function getTools() {
   try {
     const querySnapshot = await getDocs(collectionRef);
     const data = querySnapshot.docs.map((doc) => ({
-      ...doc.data()    }));
+      ...doc.data(),
+    }));
 
     result = data[0];
     console.log(result);

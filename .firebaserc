@@ -1,7 +1,6 @@
 {
   "projects": {
-    "default": "ahmedmagraby-app",
-    "maghraby": "ahmedmagraby-app"
+    "phonix": "phoonix-dev"
   },
   "targets": {},
   "etags": {}

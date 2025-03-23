@@ -1,9 +1,9 @@
-
 export type Tools = {
-  Mobile: string[];
-  Design: string[];
-  Frontend: string[];
-  Backend: string[];
-  Other: string[];
+  Other: Tool[];
 };
-// Create an array of objects with key and icon
+
+export type Tool = {
+  name: string;
+  link: string;
+  img: string;
+};

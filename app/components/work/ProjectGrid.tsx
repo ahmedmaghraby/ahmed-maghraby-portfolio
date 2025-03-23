@@ -19,8 +19,6 @@ const ProjectGrid = () => {
             return -1;
           }
         });
-        console.log(res);
-
         setProjects(res ? res : []);
       }
     });
@@ -28,28 +26,29 @@ const ProjectGrid = () => {
 
   return (
     <>
-      <div className="flex gap-16 mb-10 md:mb-16 lg:mb-20 ">
+      <div className="flex justify-center gap-16 mb-10 md:mb-16 lg:mb-20 ">
         <AnimatedTitle
           text={"Selected Work!"}
-          className={` ${lex.className} text-t-color text-lg font-light md:text-xl lg:text-2xl`}
+          className={` ${lex.className} text-center text-lg font-light text-t-color md:text-xl lg:text-4xl`}
           wordSpace={"mr-[8px]"}
           charSpace={"mr-[0.001em]"}
         />
       </div>
 
-      <div className="grid w-[90%] grid-cols-1 grid-rows-2 gap-y-10 gap-x-6 lg:max-w-7xl lg:grid-cols-1">
+      <div className="grid grid-cols-1 gap-y-10 gap-x-6 lg:grid-cols-2">
         {projects.map((project: ProjectProps, index: number) => (
-          <ProjectCard
-            id={index}
-            key={project.id}
-            name={project.name}
-            description={project.description}
-            techNames={project.techNames}
-            github={project.github}
-            demo={project.demo}
-            image={project.image}
-            available={project.available}
-          />
+          <>
+            <ProjectCard
+              id={index}
+              key={project.id}
+              name={project.name}
+              description={project.description}
+              github={project.github}
+              demo={project.demo}
+              image={project.image}
+              available={project.available}
+            />
+          </>
         ))}
       </div>
     </>
