@@ -118,8 +118,14 @@ export default function LeaderboardApp() {
 
   useEffect(() => {
     setName(getUserName());
-    setCountry(getUserCountry());
     setMyUid(getUserId());
+    const cached = getUserCountry();
+    if (cached) {
+      setCountry(cached);
+    } else {
+      // Returning users who skipped NameGate never had country fetched
+      fetchAndCacheCountry().then(code => setCountry(code));
+    }
   }, []);
 
   const loadGlobal = useCallback(async (game: GameType) => {

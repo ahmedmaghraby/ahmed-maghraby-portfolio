@@ -116,8 +116,8 @@ export async function submitScore(game: GameType, score: number): Promise<void> 
   appendMyScore(game, score);
 
   const uid     = getUserId();
-  const name    = getUserName()    || 'Anonymous';
-  const country = getUserCountry() || '';
+  const name    = getUserName() || 'Anonymous';
+  const country = getUserCountry() || await fetchAndCacheCountry();
 
   try {
     await addDoc(collection(db, COLL), {
