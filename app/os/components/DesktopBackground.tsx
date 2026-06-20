@@ -14,9 +14,10 @@ const LINK     = 130;
 const REPEL    = 130;
 const COLORS   = ['rgba(74,243,255,', 'rgba(245,211,147,', 'rgba(167,139,250,'];
 const BLOB_CFG = [
-  { ox: 0.12, oy: 0.20, radius: 0.46, color: 'rgba(74,243,255,',  phase: 0,   speed: 0.00055, amp: 0.08 },
-  { ox: 0.84, oy: 0.76, radius: 0.40, color: 'rgba(245,211,147,', phase: 2.1, speed: 0.00040, amp: 0.06 },
-  { ox: 0.50, oy: 0.44, radius: 0.34, color: 'rgba(167,139,250,', phase: 1.2, speed: 0.00070, amp: 0.05 },
+  { ox: 0.12, oy: 0.20, radius: 0.50, color: 'rgba(30,80,180,',   phase: 0,   speed: 0.00055, amp: 0.08 },
+  { ox: 0.84, oy: 0.76, radius: 0.42, color: 'rgba(10,50,140,',   phase: 2.1, speed: 0.00040, amp: 0.06 },
+  { ox: 0.50, oy: 0.44, radius: 0.38, color: 'rgba(60,120,220,',  phase: 1.2, speed: 0.00070, amp: 0.05 },
+  { ox: 0.78, oy: 0.20, radius: 0.28, color: 'rgba(100,160,255,', phase: 3.0, speed: 0.00035, amp: 0.04 },
 ];
 
 // North Star sits upper-right, clear of most desktop icons
@@ -24,7 +25,7 @@ const NS_NX = 0.80;
 const NS_NY = 0.14;
 
 function drawNorthStar(ctx: CanvasRenderingContext2D, x: number, y: number, t: number) {
-  const pulse    = 0.72 + 0.28 * Math.sin(t * 0.022);
+  const pulse    = 0.72 + 0.28 * Math.sin(t * 0.004);
   const RAY      = 90 * pulse;
   const INNER    = 3   * pulse;
 
@@ -155,8 +156,8 @@ export default function DesktopBackground() {
         b.cy = (b.oy + Math.cos(t * b.speed * 0.65 + b.phase) * b.amp) * H;
         const rad = b.radius * Math.min(W, H);
         const g   = ctx.createRadialGradient(b.cx, b.cy, 0, b.cx, b.cy, rad);
-        g.addColorStop(0,   b.color + '0.055)');
-        g.addColorStop(0.5, b.color + '0.018)');
+        g.addColorStop(0,   b.color + '0.12)');
+        g.addColorStop(0.5, b.color + '0.045)');
         g.addColorStop(1,   b.color + '0)');
         ctx.fillStyle = g;
         ctx.fillRect(0, 0, W, H);
@@ -165,14 +166,24 @@ export default function DesktopBackground() {
       // ── Twinkling starfield ─────────────────────────────────
       for (const s of stars) {
         const a = s.alpha * (0.45 + 0.55 * Math.sin(t * s.speed + s.phase));
-        ctx.fillStyle = `rgba(210,235,255,${a.toFixed(3)})`;
+        ctx.fillStyle = `rgba(220,235,255,${a.toFixed(3)})`;
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fill();
       }
 
-      // ── North Star ──────────────────────────────────────────
-      drawNorthStar(ctx, W * NS_NX, H * NS_NY, t);
+      // ── North Star — unpredictable drift (layered prime-ratio waves) ──
+      const nsX = W * (NS_NX
+        + 0.045 * Math.sin(t * 0.000173 + 1.3)
+        + 0.028 * Math.sin(t * 0.000311 + 0.7)
+        + 0.018 * Math.cos(t * 0.000719 + 2.1)
+      );
+      const nsY = H * (NS_NY
+        + 0.038 * Math.cos(t * 0.000223 + 0.4)
+        + 0.022 * Math.sin(t * 0.000409 + 1.8)
+        + 0.013 * Math.cos(t * 0.000613 + 3.2)
+      );
+      drawNorthStar(ctx, nsX, nsY, t);
 
       // ── Mouse spotlight ─────────────────────────────────────
       if (mx > -1000) {

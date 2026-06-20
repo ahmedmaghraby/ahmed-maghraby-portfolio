@@ -104,7 +104,7 @@ export default function Desktop() {
   return (
     <div
       className="w-screen h-screen overflow-hidden relative select-none"
-      style={{ background: '#06090f' }}
+      style={{ background: '#020b18' }}
       onContextMenu={handleDesktopContextMenu}
       onClick={handleDesktopClick}
     >
