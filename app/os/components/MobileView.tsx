@@ -189,12 +189,8 @@ function MobileOSInner() {
             animate={{ y: 0 }}
             exit={{ y: '100%' }}
             transition={{ type: 'spring', damping: 30, stiffness: 320, mass: 0.8 }}
-            drag="y"
-            dragConstraints={{ top: 0, bottom: 0 }}
-            dragElastic={{ top: 0, bottom: 0.25 }}
-            onDragEnd={(_, info) => { if (info.offset.y > 100) setOpenApp(null); }}
             className="absolute inset-0 z-50 flex flex-col"
-            style={{ background: '#06090f', touchAction: 'none' }}
+            style={{ background: '#06090f' }}
           >
             {/* App header */}
             <div
