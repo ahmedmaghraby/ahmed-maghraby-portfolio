@@ -8,7 +8,7 @@ interface BootScreenProps {
 }
 
 const MESSAGES = [
-  'Initializing AHMED.OS kernel...',
+  'Initializing MAGHRABY.OS kernel...',
   'Loading UI environment...',
   'Mounting virtual file system...',
   'Starting window compositor...',
@@ -68,7 +68,7 @@ export default function BootScreen({ onComplete }: BootScreenProps) {
             transition={{ delay: 0.2, duration: 0.5 }}
             className="mb-1"
           >
-            <img src="/logo.png" width={220} alt="AHMED.OS" style={{ objectFit: 'contain' }} />
+            <img src="/logo.png" width={220} alt="MAGHRABY.OS" style={{ objectFit: 'contain' }} />
           </motion.div>
 
           {/* Subtitle */}

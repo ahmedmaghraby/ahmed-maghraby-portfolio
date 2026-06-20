@@ -77,7 +77,7 @@ const EASTER_EGGS: Record<string, string> = {
   'rm -rf /': 'I see what you\'re trying to do. No.',
   ls: 'about.app  resume.app  projects.app  browser.app  snake.game  2048.game',
   pwd: '/home/ahmed',
-  'cat package.json': '{ "name": "ahmed.os", "version": "1.0.0", "author": "Ahmed Maghraby" }',
+  'cat package.json': '{ "name": "MAGHRABY.OS", "version": "1.0.0", "author": "Ahmed Maghraby" }',
 };
 
 function processCommand(raw: string, openApp: (id: string) => void): Line[] {
@@ -142,7 +142,7 @@ interface TerminalAppProps {
 
 export default function TerminalApp({ onOpenApp }: TerminalAppProps) {
   const [history, setHistory] = useState<Line[]>([
-    { type: 'output', content: 'AHMED.OS Terminal v1.0 — type \'help\' for commands.' },
+    { type: 'output', content: 'MAGHRABY.OS Terminal v1.0 — type \'help\' for commands.' },
   ]);
   const [cmdHistory, setCmdHistory] = useState<string[]>([]);
   const [historyIdx, setHistoryIdx] = useState(-1);
@@ -160,7 +160,7 @@ export default function TerminalApp({ onOpenApp }: TerminalAppProps) {
       const inputLine: Line = { type: 'input', content: cmd };
 
       if (cmd.toLowerCase() === 'clear') {
-        setHistory([{ type: 'output', content: 'AHMED.OS Terminal v1.0 — type \'help\' for commands.' }]);
+        setHistory([{ type: 'output', content: 'MAGHRABY.OS Terminal v1.0 — type \'help\' for commands.' }]);
         setInput('');
         return;
       }

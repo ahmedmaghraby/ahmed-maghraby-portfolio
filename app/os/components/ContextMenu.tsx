@@ -58,7 +58,7 @@ export default function ContextMenu({ x, y, apps, onOpen, onClose }: Props) {
         style={{ borderBottom: '1px solid rgba(245,211,147,0.08)', fontSize: 9, color: 'rgba(74,243,255,0.45)', letterSpacing: '0.25em' }}
       >
         <img src="/logo.png" width={18} alt="" style={{ objectFit: 'contain', opacity: 0.7 }} />
-        AHMED.OS
+        MAGHRABY.OS
       </div>
 
       {/* Open app items */}
@@ -76,7 +76,7 @@ export default function ContextMenu({ x, y, apps, onOpen, onClose }: Props) {
       {/* Divider + system items */}
       <div style={{ height: 1, background: 'rgba(245,211,147,0.07)', margin: '0 10px' }} />
       <div className="py-1">
-        <MenuRow icon="ℹ" label="About AHMED.OS" dim onClick={onClose} />
+        <MenuRow icon="ℹ" label="About MAGHRABY.OS" dim onClick={onClose} />
       </div>
     </div>
   );

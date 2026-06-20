@@ -32,7 +32,7 @@ export default function Taskbar() {
     >
       {/* Logo */}
       <div className="shrink-0 mr-2" style={{ opacity: 0.75 }}>
-        <img src="/logo.png" width={50} alt="AHMED.OS" style={{ objectFit: 'contain' }} />
+        <img src="/logo.png" width={50} alt="MAGHRABY.OS" style={{ objectFit: 'contain' }} />
       </div>
 
       {/* Separator */}
@@ -96,7 +96,7 @@ export default function Taskbar() {
         className="absolute left-1/2 -translate-x-1/2 font-mono tracking-[0.4em] pointer-events-none"
         style={{ fontSize: 10, color: 'rgba(245,211,147,0.18)' }}
       >
-        AHMED.OS
+        MAGHRABY.OS
       </div>
 
       {/* Clock */}

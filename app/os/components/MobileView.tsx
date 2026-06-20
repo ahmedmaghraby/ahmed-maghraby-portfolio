@@ -118,7 +118,7 @@ function HeroSection({ dragX }: { dragX: number }) {
 
       {/* Parallax logo — moves slower than content */}
       <motion.div style={{ x: dragX * 0.12 }} className="mb-5">
-        <img src="/logo.png" width={120} alt="AHMED.OS" style={{ objectFit: 'contain' }} />
+        <img src="/logo.png" width={120} alt="MAGHRABY.OS" style={{ objectFit: 'contain' }} />
       </motion.div>
 
       <motion.h1
@@ -270,7 +270,7 @@ function ProjectsSection() {
       {/* Desktop CTA */}
       <div className="rounded-2xl p-5 text-center relative overflow-hidden" style={{ background: 'rgba(245,211,147,0.05)', border: '1px solid rgba(245,211,147,0.14)' }}>
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse 80% 60% at 50% 120%, rgba(245,211,147,0.07) 0%, transparent 70%)' }} />
-        <div className="font-mono font-bold" style={{ fontSize: 14, color: '#f5d393' }}>Try AHMED.OS on Desktop</div>
+        <div className="font-mono font-bold" style={{ fontSize: 14, color: '#f5d393' }}>Try MAGHRABY.OS on Desktop</div>
         <p className="font-mono mt-1.5" style={{ fontSize: 10, color: 'rgba(255,255,255,0.38)', lineHeight: 1.7 }}>
           Draggable windows · Terminal · Games · Full OS experience
         </p>
