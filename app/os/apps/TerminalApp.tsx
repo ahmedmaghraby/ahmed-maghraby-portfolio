@@ -62,7 +62,6 @@ Azha ERP
   Stack: Vue.js, ASP.NET Core, MS SQL Server, Flutter`;
 
 const CONTACT = `Email     ahmedhamdy078@gmail.com
-Phone     +966 530 986 119
 Location  Riyadh, Saudi Arabia`;
 
 const SOCIAL_LINKS = [

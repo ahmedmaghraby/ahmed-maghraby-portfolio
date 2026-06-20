@@ -2,7 +2,6 @@
 
 const CONTACT_LINKS = [
   { label: 'ahmedhamdy078@gmail.com', href: 'mailto:ahmedhamdy078@gmail.com', icon: '✉' },
-  { label: '+966 530 986 119', href: 'tel:+966530986119', icon: '📱' },
   { label: 'linkedin.com/in/amaghraby', href: 'https://www.linkedin.com/in/amaghraby/', icon: '🔗' },
   { label: 'github.com/ahmedmaghraby', href: 'https://github.com/ahmedmaghraby', icon: '⌥' },
   { label: 'Book a Meeting', href: 'https://calendar.app.google/rPaupi1Yd5vjJahRA', icon: '📅' },
