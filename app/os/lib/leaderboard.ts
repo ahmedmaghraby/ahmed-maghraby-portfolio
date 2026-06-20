@@ -4,6 +4,7 @@ import {
   collection,
   addDoc,
   query,
+  where,
   orderBy,
   limit,
   getDocs,
@@ -68,6 +69,8 @@ const COLL = 'os_leaderboard';
 
 export async function submitScore(game: GameType, score: number): Promise<void> {
   if (score <= 0) return;
+
+  // Always save to local history first
   appendMyScore(game, score);
 
   const name = getUserName() || 'Anonymous';
@@ -78,42 +81,60 @@ export async function submitScore(game: GameType, score: number): Promise<void> 
       score,
       date: serverTimestamp(),
     });
-  } catch {
-    // Firestore unavailable — local history still saved
+    console.log(`[leaderboard] Score submitted: ${name} — ${game} — ${score}`);
+  } catch (err: unknown) {
+    // Log the real error so it's visible in browser devtools
+    console.error('[leaderboard] Firestore write failed:', err);
+    console.warn(
+      '[leaderboard] If you see "permission-denied", update your Firestore rules:\n' +
+      'rules_version = \'2\';\n' +
+      'service cloud.firestore {\n' +
+      '  match /databases/{database}/documents {\n' +
+      '    match /os_leaderboard/{doc} {\n' +
+      '      allow read: if true;\n' +
+      '      allow create: if request.resource.data.score is number\n' +
+      '                    && request.resource.data.game in [\'snake\', \'2048\', \'racer\']\n' +
+      '                    && request.resource.data.name is string;\n' +
+      '    }\n' +
+      '  }\n' +
+      '}'
+    );
   }
 }
 
 export async function getGlobalTop(game: GameType, n = 10): Promise<GlobalScore[]> {
   try {
+    // Query filtered by game + ordered by score descending
+    // Requires a Firestore composite index: (game ASC, score DESC)
     const q = query(
       collection(db, COLL),
+      where('game', '==', game),
       orderBy('score', 'desc'),
-      limit(n * 5), // over-fetch to filter by game client-side
+      limit(n),
     );
     const snap = await getDocs(q);
     const all: GlobalScore[] = [];
     snap.forEach(doc => {
       const d = doc.data();
-      if (d.game === game) {
-        all.push({
-          name: d.name ?? 'Anonymous',
-          game: d.game,
-          score: d.score ?? 0,
-          date: d.date instanceof Timestamp
-            ? d.date.toDate().toISOString()
-            : new Date().toISOString(),
-        });
-      }
+      all.push({
+        name:  d.name  ?? 'Anonymous',
+        game:  d.game,
+        score: d.score ?? 0,
+        date:  d.date instanceof Timestamp
+          ? d.date.toDate().toISOString()
+          : new Date().toISOString(),
+      });
     });
-    return all.slice(0, n);
-  } catch {
+    return all;
+  } catch (err) {
+    console.error('[leaderboard] Firestore read failed:', err);
     return [];
   }
 }
 
-// ─── Legacy local save (still used by SnakeApp + App2048 until refactor) ─────
-// Kept for backward compat — routes through submitScore
+// ─── Compat shim ──────────────────────────────────────────────────────────────
+// Called by SnakeApp, App2048, RacerApp — fire-and-forget
 
 export function saveScore(game: GameType, score: number): void {
-  submitScore(game, score); // fire-and-forget
+  submitScore(game, score);
 }
