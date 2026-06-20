@@ -160,9 +160,19 @@ export default function NotesApp() {
           )}
         </div>
 
-        {/* Footer: note count */}
-        <div className="px-3 py-2 shrink-0 font-mono" style={{ fontSize: 9, color: 'rgba(255,255,255,0.2)', borderTop: '1px solid rgba(255,255,255,0.04)' }}>
-          {notes.length} note{notes.length !== 1 ? 's' : ''} · saved locally
+        {/* Footer: note count + local storage badge */}
+        <div className="px-3 py-2 shrink-0 font-mono flex flex-col gap-1" style={{ borderTop: '1px solid rgba(255,255,255,0.04)' }}>
+          <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.25)' }}>
+            {notes.length} note{notes.length !== 1 ? 's' : ''}
+          </span>
+          <div
+            className="flex items-center gap-1 rounded-md px-1.5 py-1"
+            style={{ background: 'rgba(74,243,255,0.06)', border: '1px solid rgba(74,243,255,0.12)' }}
+            title="Notes are stored in your browser's localStorage — they stay private to this device"
+          >
+            <span style={{ fontSize: 9 }}>💾</span>
+            <span style={{ fontSize: 9, color: 'rgba(74,243,255,0.6)', letterSpacing: '0.04em' }}>Saved on this device</span>
+          </div>
         </div>
       </div>
 
