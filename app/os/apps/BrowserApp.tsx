@@ -4,7 +4,7 @@ import { FormEvent, useEffect, useRef, useState } from 'react';
 import { useWindowManager } from '../context/WindowManagerContext';
 
 const BOOKMARKS = [
-  { label: 'Old Portfolio', url: 'https://ahmedmaghraby.me',                      icon: '💼', embed: true  },
+  { label: 'Old Portfolio', url: '/legacy',                                         icon: '💼', embed: true  },
   { label: 'LinkedIn',      url: 'https://www.linkedin.com/in/amaghraby/',         icon: '🔗', embed: false },
   { label: 'GitHub',        url: 'https://github.com/ahmedmaghraby',               icon: '⌥', embed: false },
   { label: 'Book Meeting',  url: 'https://calendar.app.google/rPaupi1Yd5vjJahRA',  icon: '📅', embed: false },
