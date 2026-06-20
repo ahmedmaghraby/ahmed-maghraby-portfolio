@@ -139,6 +139,7 @@ export default function BrowserApp() {
               {BOOKMARKS.map(bm => (
                 <button
                   key={bm.url}
+                  onClick={() => navigate(bm.url)}
                   className="flex flex-col items-center gap-2 p-4 rounded-xl transition-all duration-150"
                   style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}
                   onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(245,211,147,0.06)'; el.style.borderColor = 'rgba(245,211,147,0.15)'; }}
@@ -156,11 +157,7 @@ export default function BrowserApp() {
                       title="Open in new tab"
                     >↗</a>
                   </div>
-                  <div
-                    className="font-mono w-full text-left"
-                    style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)' }}
-                    onClick={() => navigate(bm.url)}
-                  >
+                  <div className="font-mono w-full text-left" style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)' }}>
                     {bm.label}
                   </div>
                 </button>
