@@ -1,100 +1,87 @@
-# Ahmed Maghraby Portfolio Project
+# MAGHRABY.OS — Portfolio
 
-Welcome to my interactive portfolio! This project showcases my skills and projects using a modern and dynamic web interface built with Next.js and TypeScript. Below, you'll find details about the technologies and libraries used, as well as how to set up and run the project locally.
+A browser-based OS experience built as an interactive portfolio. Instead of a traditional webpage, visitors land inside a simulated desktop environment — complete with a window manager, draggable apps, animated background, and a live legacy portfolio accessible from within.
 
-## Table of Contents
-
-- [Features](#features)
-- [Technologies Used](#technologies-used)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
-
-## Features
-
-- **Dynamic Particle Backgrounds**: Eye-catching particle effects using `tsparticles`.
-- **Smooth Animations**: Professional transitions powered by GSAP and Framer Motion.
-- **Responsive Design**: Optimized for all devices.
-- **Project Showcase**: Detailed sections for each project with descriptions and links.
-- **Interactive Contact Section**: Easy-to-use animated contact form.
-
-## Technologies Used
-
-- **Framework**: [Next.js](https://nextjs.org/) 
-- **JavaScript Library**: [React](https://reactjs.org/) 
-- **TypeScript**: [TypeScript](https://www.typescriptlang.org/) 
-- **Animations**:
-  - [GSAP](https://greensock.com/gsap/)
-  - [GSAP Trial](https://greensock.com/trial/)
-  - [Framer Motion](https://www.framer.com/motion/)
-  - [Scroller Motion](https://www.npmjs.com/package/scroller-motion) 
-- **Styling**:
-  - [Tailwind CSS](https://tailwindcss.com/)
-- **Firebase**: [Firebase](https://firebase.google.com/)
-
-## Installation
-
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/ahmedmaghraby/ahmed-maghraby-portfolio.git
-    cd ahmed-maghraby-portfolio
-    ```
-
-2. Install the dependencies:
-    ```bash
-    npm install
-    ```
-
-## Usage
-
-1. Build the project for production:
-    ```bash
-    npm run build
-    ```
-
-2. Run the development server:
-    ```bash
-    npm run dev
-    ```
-    Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
-
-3. Start the production server:
-    ```bash
-    npm start
-    ```
-
-## Project Structure
-
-    ├── public/                # Public assets
-    ├── src/
-    │   ├── animations/        # Animation-related component
-    │   ├── assets/            # css file used in the application
-    │   ├── components/        # React components
-    │   ├── helper/            # Helper functions and utilities
-    │   ├── sections/          # Sections of the application (likely about section)
-    │   ├── service/           # Service-related code (likely interacting with Firebase).
-    │   └── types/             # TypeScript type definitions
-    ├── .eslintrc.js           # ESLint configuration
-    ├── .prettierrc            # Prettier configuration
-    ├── next.config.js         # Next.js configuration
-    ├── firebase.json          # hosting configuration file.
-    ├── config.json            # Firebase configuration file.
-    ├── tailwind.config.js     # Tailwind CSS configuration file
-    ├── package.json           # NPM scripts and dependencies
-    └── README.md              # Project documentation
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+Live: **[ahmedmagraby-app.web.app](https://ahmedmagraby-app.web.app)**
 
 ---
 
-Feel free to reach out if you have any questions or feedback! Thank you for visiting my portfolio project.
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=ahmed-maghraby-portfolio&label=Profile%20views&color=0e75b6&style=flat" alt="ahmedmaghraby" /> </p>
+## Features
 
+See [FEATURES.md](FEATURES.md) for the full breakdown.
+
+- Browser-based OS desktop with draggable, resizable, maximizable windows
+- Animated canvas background — Aquarius constellation, aurora blobs, North Star, shooting meteors
+- Built-in Browser app with bookmark cards and same-domain iframe for the legacy portfolio
+- Mini-games: Snake and 2048 with a live leaderboard
+- `/legacy` route serving the original portfolio as a full-page experience
+- MAGHRABY.OS-themed 404 page with terminal boot sequence
+- Static export deployed to Firebase Hosting
+
+---
+
+## Stack
+
+| Layer | Technology |
+|---|---|
+| Framework | Next.js 13 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| Animation | Framer Motion, Canvas 2D API |
+| Deployment | Firebase Hosting (static export) |
+| Legacy animations | GSAP + ScrollTrigger |
+
+---
+
+## Getting Started
+
+```bash
+git clone https://github.com/ahmedmaghraby/ahmed-maghraby-portfolio.git
+cd ahmed-maghraby-portfolio
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+---
+
+## Build & Deploy
+
+```bash
+# Static export to out/
+npm run build
+
+# Deploy to Firebase Hosting
+firebase deploy --only hosting
+```
+
+> `output: "export"` in `next.config.js` generates a fully static site — no server-side API routes.
+
+---
+
+## Project Structure
+
+```
+app/
+├── os/                    # OS desktop environment
+│   ├── components/        # Desktop, Taskbar, Window, DesktopBackground
+│   ├── apps/              # BrowserApp, SnakeApp, App2048, LeaderboardApp
+│   ├── context/           # WindowManagerContext
+│   └── lib/               # Leaderboard logic
+├── legacy/                # Old portfolio served as a route
+├── sections/              # Original portfolio sections (Hero, About, Work…)
+├── components/            # Shared UI components
+├── not-found.tsx          # 404 terminal boot page
+└── page.tsx               # Entry — renders the OS desktop
+```
+
+---
+
+## License
+
+MIT — see [LICENSE](LICENSE).
+
+<p align="left">
+  <img src="https://komarev.com/ghpvc/?username=ahmed-maghraby-portfolio&label=Profile%20views&color=0e75b6&style=flat" alt="ahmedmaghraby" />
+</p>
