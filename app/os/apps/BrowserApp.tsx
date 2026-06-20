@@ -1,12 +1,13 @@
 'use client';
 
 import { FormEvent, useEffect, useRef, useState } from 'react';
+import { useWindowManager } from '../context/WindowManagerContext';
 
 const BOOKMARKS = [
-  { label: 'Old Portfolio', url: 'https://ahmedmaghraby.me',                     icon: '💼' },
-  { label: 'LinkedIn',      url: 'https://www.linkedin.com/in/amaghraby/',        icon: '🔗' },
-  { label: 'GitHub',        url: 'https://github.com/ahmedmaghraby',              icon: '⌥' },
-  { label: 'Book Meeting',  url: 'https://calendar.app.google/rPaupi1Yd5vjJahRA', icon: '📅' },
+  { label: 'Old Portfolio', url: 'https://ahmedmaghraby.me',                      icon: '💼', embed: true  },
+  { label: 'LinkedIn',      url: 'https://www.linkedin.com/in/amaghraby/',         icon: '🔗', embed: false },
+  { label: 'GitHub',        url: 'https://github.com/ahmedmaghraby',               icon: '⌥', embed: false },
+  { label: 'Book Meeting',  url: 'https://calendar.app.google/rPaupi1Yd5vjJahRA', icon: '📅', embed: false },
 ];
 
 function proxyUrl(target: string) {
@@ -14,14 +15,20 @@ function proxyUrl(target: string) {
 }
 
 export default function BrowserApp() {
-  const [url, setUrl]             = useState('');
-  const [activeUrl, setActiveUrl] = useState('');
-  const [iframeSrc, setIframeSrc] = useState('');
-  const [blocked, setBlocked]     = useState(false);
-  const [loading, setLoading]     = useState(false);
-  const [usingProxy, setUsingProxy] = useState(false);
-  const iframeRef                 = useRef<HTMLIFrameElement>(null);
-  const timeoutRef                = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { windows, maximizeWindow }   = useWindowManager();
+  const [url, setUrl]                 = useState('');
+  const [activeUrl, setActiveUrl]     = useState('');
+  const [iframeSrc, setIframeSrc]     = useState('');
+  const [blocked, setBlocked]         = useState(false);
+  const [loading, setLoading]         = useState(false);
+  const [usingProxy, setUsingProxy]   = useState(false);
+  const iframeRef                     = useRef<HTMLIFrameElement>(null);
+  const timeoutRef                    = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const maximize = () => {
+    const win = windows.find(w => w.appId === 'browser');
+    if (win && !win.isMaximized) maximizeWindow(win.id);
+  };
 
   const navigate = (target: string, forceProxy = false) => {
     let full = target.trim();
@@ -139,7 +146,10 @@ export default function BrowserApp() {
               {BOOKMARKS.map(bm => (
                 <button
                   key={bm.url}
-                  onClick={() => navigate(bm.url)}
+                  onClick={() => {
+                    if (bm.embed) { maximize(); navigate(bm.url); }
+                    else window.open(bm.url, '_blank', 'noopener,noreferrer');
+                  }}
                   className="flex flex-col items-center gap-2 p-4 rounded-xl transition-all duration-150"
                   style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.07)' }}
                   onMouseEnter={e => { const el = e.currentTarget as HTMLElement; el.style.background = 'rgba(245,211,147,0.06)'; el.style.borderColor = 'rgba(245,211,147,0.15)'; }}
@@ -147,15 +157,10 @@ export default function BrowserApp() {
                 >
                   <div className="flex items-center justify-between w-full">
                     <span style={{ fontSize: 22 }}>{bm.icon}</span>
-                    <a
-                      href={bm.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={e => e.stopPropagation()}
+                    <span
                       className="font-mono"
-                      style={{ fontSize: 10, color: 'rgba(74,243,255,0.5)', textDecoration: 'none' }}
-                      title="Open in new tab"
-                    >↗</a>
+                      style={{ fontSize: 10, color: bm.embed ? 'rgba(245,211,147,0.5)' : 'rgba(74,243,255,0.5)' }}
+                    >{bm.embed ? '⛶' : '↗'}</span>
                   </div>
                   <div className="font-mono w-full text-left" style={{ fontSize: 11, color: 'rgba(255,255,255,0.5)' }}>
                     {bm.label}
