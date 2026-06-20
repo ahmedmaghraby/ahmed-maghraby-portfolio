@@ -8,7 +8,6 @@ import { APPS } from '../apps';
 import { AppDefinition } from '../types';
 import Window from './Window';
 import DesktopIcon from './DesktopIcon';
-import { useEffect } from 'react';
 import Taskbar from './Taskbar';
 import ContextMenu from './ContextMenu';
 import AboutApp from '../apps/AboutApp';
@@ -70,16 +69,8 @@ export default function Desktop() {
   const [iconPositions, setIconPositions] = useState<Record<string, { x: number; y: number }>>(
     loadIconPositions
   );
-  const [isMobile, setIsMobile] = useState(false);
 
   const [ctxMenu, setCtxMenu] = useState<{ x: number; y: number } | null>(null);
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
 
   const handleOpenApp = useCallback(
     (app: AppDefinition) => {
@@ -122,8 +113,9 @@ export default function Desktop() {
       {/* Interactive canvas background */}
       <DesktopBackground />
 
-      {/* Desktop Icons — hidden on mobile, draggable on desktop */}
-      {!isMobile && APPS.map(app => {
+      {/* Desktop Icons — CSS hidden on mobile, draggable on desktop */}
+      <div className="hidden md:block">
+      {APPS.map(app => {
         const p = iconPositions[app.id] ?? { x: 12, y: 12 };
         return (
           <DesktopIcon
@@ -138,6 +130,7 @@ export default function Desktop() {
           />
         );
       })}
+      </div>
 
       {/* Windows */}
       <AnimatePresence>

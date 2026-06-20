@@ -10,7 +10,6 @@ export default function Taskbar() {
   const { windows, openApp, focusWindow, minimizeWindow, maximizeWindow } = useWindowManager();
   const [time, setTime]         = useState('');
   const [date, setDate]         = useState('');
-  const [isMobile, setIsMobile] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   useEffect(() => {
@@ -24,25 +23,13 @@ export default function Taskbar() {
     return () => clearInterval(id);
   }, []);
 
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, []);
-
   const handleOpenApp = (app: AppDefinition) => {
-    const alreadyOpen = windows.find(w => w.appId === app.id);
     openApp(app);
-    // Auto-maximize on mobile
-    if (isMobile) {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
       setTimeout(() => {
         const win = windows.find(w => w.appId === app.id);
         if (win && !win.isMaximized) maximizeWindow(win.id);
-      }, 50);
-    }
-    if (alreadyOpen && !alreadyOpen.isMinimized) {
-      minimizeWindow(alreadyOpen.id);
+      }, 60);
     }
   };
 
@@ -50,7 +37,7 @@ export default function Taskbar() {
     <>
       {drawerOpen && (
         <MobileAppDrawer
-          onOpen={handleOpenApp}
+          onOpen={app => { handleOpenApp(app); setDrawerOpen(false); }}
           onClose={() => setDrawerOpen(false)}
         />
       )}
@@ -70,82 +57,73 @@ export default function Taskbar() {
         </div>
 
         {/* Separator */}
-        <div
-          className="shrink-0 mr-2"
-          style={{ width: 1, height: 26, background: 'rgba(245,211,147,0.1)' }}
-        />
+        <div className="shrink-0 mr-2" style={{ width: 1, height: 26, background: 'rgba(245,211,147,0.1)' }} />
 
-        {/* Desktop: individual app icons */}
-        {!isMobile && (
-          <div className="flex items-center gap-0.5">
-            {APPS.map(app => {
-              const win = windows.find(w => w.appId === app.id);
-              const isOpen = !!win;
-              const isActive = isOpen && !win.isMinimized;
+        {/* Desktop: individual app icons — hidden below md */}
+        <div className="hidden md:flex items-center gap-0.5">
+          {APPS.map(app => {
+            const win = windows.find(w => w.appId === app.id);
+            const isOpen = !!win;
+            const isActive = isOpen && !win.isMinimized;
 
-              return (
-                <button
-                  key={app.id}
-                  title={app.title}
-                  onClick={() => {
-                    if (isOpen) {
-                      if (win.isMinimized) focusWindow(win.id);
-                      else minimizeWindow(win.id);
-                    } else {
-                      openApp(app);
-                    }
-                  }}
-                  className="relative flex items-center justify-center rounded-lg transition-colors duration-150"
-                  style={{
-                    width: 42, height: 42,
-                    background: isActive ? 'rgba(245,211,147,0.12)' : 'transparent',
-                  }}
-                  onMouseEnter={e => {
-                    if (!isActive)
-                      (e.currentTarget as HTMLElement).style.background = 'rgba(245,211,147,0.07)';
-                  }}
-                  onMouseLeave={e => {
-                    if (!isActive)
-                      (e.currentTarget as HTMLElement).style.background = 'transparent';
-                  }}
-                >
-                  <span className="text-lg leading-none">{app.icon}</span>
-                  {isOpen && (
-                    <span
-                      className="absolute bottom-1 left-1/2 -translate-x-1/2 rounded-full"
-                      style={{
-                        width: isActive ? 4 : 3,
-                        height: isActive ? 4 : 3,
-                        background: isActive ? '#f5d393' : 'rgba(245,211,147,0.4)',
-                      }}
-                    />
-                  )}
-                </button>
-              );
-            })}
-          </div>
-        )}
+            return (
+              <button
+                key={app.id}
+                title={app.title}
+                onClick={() => {
+                  if (isOpen) {
+                    if (win.isMinimized) focusWindow(win.id);
+                    else minimizeWindow(win.id);
+                  } else {
+                    openApp(app);
+                  }
+                }}
+                className="relative flex items-center justify-center rounded-lg transition-colors duration-150"
+                style={{
+                  width: 42, height: 42,
+                  background: isActive ? 'rgba(245,211,147,0.12)' : 'transparent',
+                }}
+                onMouseEnter={e => {
+                  if (!isActive) (e.currentTarget as HTMLElement).style.background = 'rgba(245,211,147,0.07)';
+                }}
+                onMouseLeave={e => {
+                  if (!isActive) (e.currentTarget as HTMLElement).style.background = 'transparent';
+                }}
+              >
+                <span className="text-lg leading-none">{app.icon}</span>
+                {isOpen && (
+                  <span
+                    className="absolute bottom-1 left-1/2 -translate-x-1/2 rounded-full"
+                    style={{
+                      width: isActive ? 4 : 3,
+                      height: isActive ? 4 : 3,
+                      background: isActive ? '#f5d393' : 'rgba(245,211,147,0.4)',
+                    }}
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
 
-        {/* Mobile: launcher button */}
-        {isMobile && (
-          <button
-            onClick={() => setDrawerOpen(true)}
-            className="flex items-center gap-2 rounded-xl px-3 font-mono"
-            style={{
-              height: 36,
-              background: 'rgba(245,211,147,0.08)',
-              border: '1px solid rgba(245,211,147,0.18)',
-              color: 'rgba(245,211,147,0.7)',
-              fontSize: 11,
-              letterSpacing: '0.15em',
-            }}
-          >
-            <span style={{ fontSize: 16 }}>⊞</span>
-            <span>Apps</span>
-          </button>
-        )}
+        {/* Mobile: launcher button — hidden above md */}
+        <button
+          className="flex md:hidden items-center gap-2 rounded-xl px-3 font-mono"
+          onClick={() => setDrawerOpen(true)}
+          style={{
+            height: 36,
+            background: 'rgba(245,211,147,0.08)',
+            border: '1px solid rgba(245,211,147,0.18)',
+            color: 'rgba(245,211,147,0.7)',
+            fontSize: 11,
+            letterSpacing: '0.15em',
+          }}
+        >
+          <span style={{ fontSize: 16 }}>⊞</span>
+          <span>Apps</span>
+        </button>
 
-        {/* Center label */}
+        {/* Center OS label */}
         <div
           className="absolute left-1/2 -translate-x-1/2 font-mono tracking-[0.4em] pointer-events-none"
           style={{ fontSize: 10, color: 'rgba(245,211,147,0.18)' }}
@@ -154,7 +132,7 @@ export default function Taskbar() {
         </div>
 
         {/* Clock */}
-        <div className="ml-auto text-right">
+        <div className="ml-auto text-right shrink-0">
           <div className="font-mono tabular-nums" style={{ fontSize: 12, color: 'rgba(245,211,147,0.7)' }}>
             {time}
           </div>
