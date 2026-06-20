@@ -27,7 +27,7 @@ export default function BrowserApp() {
   const navigate = (target: string) => {
     let full = target.trim();
     if (!full) return;
-    if (!/^https?:\/\//i.test(full)) full = `https://${full}`;
+    if (!full.startsWith('/') && !/^https?:\/\//i.test(full)) full = `https://${full}`;
     setUrl(full);
     setActiveUrl(full);
     setBlocked(false);
