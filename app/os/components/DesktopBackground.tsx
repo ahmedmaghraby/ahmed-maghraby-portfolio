@@ -24,24 +24,23 @@ const BLOB_CFG = [
 const NS_NX = 0.80;
 const NS_NY = 0.14;
 
-// Aquarius — traced from reference image.
-// Has a BRANCH at the junction: diagonal top-right → junction → RIGHT ARM (2 stars) + LEFT CHAIN down → water chain
+// Aquarius — 90° clockwise rotation of the reference-traced positions.
+// Centroid was (0.385, 0.497); formula: new_x = cx-(y-cy), new_y = cy+(x-cx), then +0.05 x-offset for icon clearance.
 const AQUARIUS: [number, number][] = [
-  [0.62, 0.07],  //  0  top bright star
-  [0.44, 0.22],  //  1  second diagonal
-  [0.35, 0.33],  //  2  JUNCTION — branches right AND continues down-left
-  [0.50, 0.40],  //  3  arm star 1 (right branch)
-  [0.60, 0.37],  //  4  arm tip — bright (α Aqr)
-  [0.28, 0.43],  //  5  left chain below junction (β Aqr)
-  [0.23, 0.51],  //  6
-  [0.20, 0.56],  //  7  cluster
-  [0.25, 0.59],  //  8  cluster
-  [0.20, 0.63],  //  9  cluster bottom
-  [0.24, 0.68],  // 10  water chain begins
-  [0.35, 0.68],  // 11  water going right
-  [0.41, 0.64],  // 12  water slight up
-  [0.50, 0.69],  // 13  water continues
-  [0.61, 0.66],  // 14  water end bright (δ Aqr)
+  [0.86, 0.73],  //  0  bright (was top-right, now bottom-right)
+  [0.71, 0.62],  //  1
+  [0.60, 0.46],  //  2  JUNCTION
+  [0.53, 0.61],  //  3  arm star 1 (arm now goes downward)
+  [0.56, 0.71],  //  4  arm tip — bright
+  [0.53, 0.45],  //  8  cluster
+  [0.50, 0.39],  //  5
+  [0.42, 0.34],  //  6
+  [0.37, 0.31],  //  7  cluster
+  [0.30, 0.31],  //  9
+  [0.25, 0.35],  // 10  water chain
+  [0.29, 0.52],  // 12
+  [0.24, 0.61],  // 13
+  [0.15, 0.72],  // 14  bright
 ];
 
 const AQUARIUS_EDGES: [number, number][] = [
@@ -50,7 +49,7 @@ const AQUARIUS_EDGES: [number, number][] = [
   [2, 5], [5, 6], [6, 7],    // left chain down from junction
   [7, 8], [8, 9],             // cluster zigzag
   [9, 10],                    // connect cluster to water chain
-  [10, 11], [11, 12], [12, 13], [13, 14], // water chain flowing right
+  [10, 11], [11, 12], [12, 13]// water chain flowing right
 ];
 
 function drawAquarius(ctx: CanvasRenderingContext2D, W: number, H: number, t: number) {
