@@ -9,15 +9,21 @@ const BOOKMARKS = [
   { label: 'Book Meeting',  url: 'https://calendar.app.google/rPaupi1Yd5vjJahRA', icon: '📅' },
 ];
 
-export default function BrowserApp() {
-  const [url, setUrl]         = useState('');
-  const [activeUrl, setActiveUrl] = useState('');
-  const [blocked, setBlocked] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const iframeRef             = useRef<HTMLIFrameElement>(null);
-  const timeoutRef            = useRef<ReturnType<typeof setTimeout> | null>(null);
+function proxyUrl(target: string) {
+  return `/api/proxy?url=${encodeURIComponent(target)}`;
+}
 
-  const navigate = (target: string) => {
+export default function BrowserApp() {
+  const [url, setUrl]             = useState('');
+  const [activeUrl, setActiveUrl] = useState('');
+  const [iframeSrc, setIframeSrc] = useState('');
+  const [blocked, setBlocked]     = useState(false);
+  const [loading, setLoading]     = useState(false);
+  const [usingProxy, setUsingProxy] = useState(false);
+  const iframeRef                 = useRef<HTMLIFrameElement>(null);
+  const timeoutRef                = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const navigate = (target: string, forceProxy = false) => {
     let full = target.trim();
     if (!full) return;
     if (!/^https?:\/\//i.test(full)) full = `https://${full}`;
@@ -25,13 +31,25 @@ export default function BrowserApp() {
     setActiveUrl(full);
     setBlocked(false);
     setLoading(true);
+    setUsingProxy(forceProxy);
+    setIframeSrc(forceProxy ? proxyUrl(full) : full);
 
-    // If iframe hasn't loaded in 8s, assume blocked / failed
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
-      setBlocked(true);
-      setLoading(false);
-    }, 8000);
+      if (!forceProxy) {
+        // Direct load timed out — retry through proxy
+        setUsingProxy(true);
+        setIframeSrc(proxyUrl(full));
+        setLoading(true);
+        timeoutRef.current = setTimeout(() => {
+          setBlocked(true);
+          setLoading(false);
+        }, 10000);
+      } else {
+        setBlocked(true);
+        setLoading(false);
+      }
+    }, 6000);
   };
 
   const handleSubmit = (e: FormEvent) => {
@@ -42,15 +60,19 @@ export default function BrowserApp() {
   const handleIframeLoad = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
     try {
-      // If X-Frame-Options blocks the iframe the browser navigates it to about:blank
       const loc = iframeRef.current?.contentWindow?.location?.href;
       if (loc === 'about:blank' || loc === '') {
-        setBlocked(true);
-        setLoading(false);
+        if (!usingProxy) {
+          // Direct blocked — try proxy
+          navigate(activeUrl, true);
+        } else {
+          setBlocked(true);
+          setLoading(false);
+        }
         return;
       }
     } catch {
-      // SecurityError = cross-origin page that DID load — that's fine
+      // SecurityError = cross-origin page loaded fine
     }
     setLoading(false);
   };
@@ -187,15 +209,26 @@ export default function BrowserApp() {
                 <div className="h-full animate-pulse" style={{ background: '#f5d393', width: '65%' }} />
               </div>
             )}
+            {usingProxy && !loading && (
+              <div
+                className="absolute bottom-2 right-2 z-10 font-mono px-2 py-1 rounded"
+                style={{ fontSize: 9, color: 'rgba(74,243,255,0.5)', background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(74,243,255,0.15)', letterSpacing: '0.1em' }}
+              >
+                via proxy
+              </div>
+            )}
             <iframe
               ref={iframeRef}
-              key={activeUrl}
-              src={activeUrl}
+              key={iframeSrc}
+              src={iframeSrc}
               className="w-full h-full border-0"
               title="Browser"
               onLoad={handleIframeLoad}
-              onError={() => { setBlocked(true); setLoading(false); if (timeoutRef.current) clearTimeout(timeoutRef.current); }}
-              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+              onError={() => {
+                if (!usingProxy) { navigate(activeUrl, true); }
+                else { setBlocked(true); setLoading(false); if (timeoutRef.current) clearTimeout(timeoutRef.current); }
+              }}
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
             />
           </>
         )}
