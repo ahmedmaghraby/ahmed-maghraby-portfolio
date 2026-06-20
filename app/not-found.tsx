@@ -19,7 +19,8 @@ export default function NotFound() {
   useEffect(() => {
     let i = 0;
     const id = setInterval(() => {
-      setLines(prev => [...prev, BOOT_LINES[i]]);
+      const line = BOOT_LINES[i];
+      setLines(prev => [...prev, line]);
       i++;
       if (i >= BOOT_LINES.length) { clearInterval(id); setDone(true); }
     }, 320);
