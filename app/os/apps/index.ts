@@ -71,4 +71,11 @@ export const APPS: AppDefinition[] = [
     defaultSize: { width: 620, height: 460 },
     description: 'Notepad — saves locally',
   },
+  {
+    id: 'email',
+    title: 'Mail',
+    icon: '✉️',
+    defaultSize: { width: 560, height: 500 },
+    description: 'Send me a message',
+  },
 ];

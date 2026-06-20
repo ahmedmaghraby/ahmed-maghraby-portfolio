@@ -8,6 +8,7 @@ import { APPS } from '../apps';
 import { AppDefinition } from '../types';
 import Window from './Window';
 import DesktopIcon from './DesktopIcon';
+import { useEffect } from 'react';
 import Taskbar from './Taskbar';
 import ContextMenu from './ContextMenu';
 import AboutApp from '../apps/AboutApp';
@@ -21,6 +22,7 @@ import LeaderboardApp from '../apps/LeaderboardApp';
 import RacerApp from '../apps/RacerApp';
 import CalculatorApp from '../apps/CalculatorApp';
 import NotesApp from '../apps/NotesApp';
+import EmailApp from '../apps/EmailApp';
 import DesktopBackground from './DesktopBackground';
 
 function renderApp(appId: string, openApp: (app: AppDefinition) => void) {
@@ -36,6 +38,7 @@ function renderApp(appId: string, openApp: (app: AppDefinition) => void) {
     case 'racer':       return <RacerApp />;
     case 'calculator':  return <CalculatorApp />;
     case 'notes':       return <NotesApp />;
+    case 'email':       return <EmailApp />;
     default:            return null;
   }
 }
@@ -67,8 +70,16 @@ export default function Desktop() {
   const [iconPositions, setIconPositions] = useState<Record<string, { x: number; y: number }>>(
     loadIconPositions
   );
+  const [isMobile, setIsMobile] = useState(false);
 
   const [ctxMenu, setCtxMenu] = useState<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   const handleOpenApp = useCallback(
     (app: AppDefinition) => {
@@ -111,8 +122,8 @@ export default function Desktop() {
       {/* Interactive canvas background */}
       <DesktopBackground />
 
-      {/* Desktop Icons — absolutely positioned, draggable */}
-      {APPS.map(app => {
+      {/* Desktop Icons — hidden on mobile, draggable on desktop */}
+      {!isMobile && APPS.map(app => {
         const p = iconPositions[app.id] ?? { x: 12, y: 12 };
         return (
           <DesktopIcon
