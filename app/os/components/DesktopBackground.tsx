@@ -24,6 +24,76 @@ const BLOB_CFG = [
 const NS_NX = 0.80;
 const NS_NY = 0.14;
 
+// Aquarius — traced from reference image.
+// Has a BRANCH at the junction: diagonal top-right → junction → RIGHT ARM (2 stars) + LEFT CHAIN down → water chain
+const AQUARIUS: [number, number][] = [
+  [0.62, 0.07],  //  0  top bright star
+  [0.44, 0.22],  //  1  second diagonal
+  [0.35, 0.33],  //  2  JUNCTION — branches right AND continues down-left
+  [0.50, 0.40],  //  3  arm star 1 (right branch)
+  [0.60, 0.37],  //  4  arm tip — bright (α Aqr)
+  [0.28, 0.43],  //  5  left chain below junction (β Aqr)
+  [0.23, 0.51],  //  6
+  [0.20, 0.56],  //  7  cluster
+  [0.25, 0.59],  //  8  cluster
+  [0.20, 0.63],  //  9  cluster bottom
+  [0.24, 0.68],  // 10  water chain begins
+  [0.35, 0.68],  // 11  water going right
+  [0.41, 0.64],  // 12  water slight up
+  [0.50, 0.69],  // 13  water continues
+  [0.61, 0.66],  // 14  water end bright (δ Aqr)
+];
+
+const AQUARIUS_EDGES: [number, number][] = [
+  [0, 1], [1, 2],             // top diagonal
+  [2, 3], [3, 4],             // RIGHT ARM (the branch going right from junction)
+  [2, 5], [5, 6], [6, 7],    // left chain down from junction
+  [7, 8], [8, 9],             // cluster zigzag
+  [9, 10],                    // connect cluster to water chain
+  [10, 11], [11, 12], [12, 13], [13, 14], // water chain flowing right
+];
+
+function drawAquarius(ctx: CanvasRenderingContext2D, W: number, H: number, t: number) {
+  const shimmer = 0.78 + 0.22 * Math.sin(t * 0.007);
+  const pts     = AQUARIUS.map(([nx, ny]) => [nx * W, ny * H] as [number, number]);
+
+  ctx.save();
+
+  // Constellation lines
+  ctx.lineWidth = 1.0;
+  for (const [a, b] of AQUARIUS_EDGES) {
+    const [x1, y1] = pts[a];
+    const [x2, y2] = pts[b];
+    ctx.strokeStyle = `rgba(140,200,255,${(0.30 * shimmer).toFixed(3)})`;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+  }
+
+  // Star dots + soft glow
+  for (let i = 0; i < pts.length; i++) {
+    const [x, y] = pts[i];
+    const twinkle  = 0.6 + 0.4 * Math.sin(t * 0.014 + i * 1.57);
+    // Stars 0, 4, 14 are the brightest in the constellation
+    const isBright = i === 0 || i === 4 || i === 14;
+    const r        = isBright ? 2.2 : 1.4;
+
+    // Soft glow (tight, not overwhelming)
+    const g = ctx.createRadialGradient(x, y, 0, x, y, r * 3.5);
+    g.addColorStop(0, `rgba(160,220,255,${(0.35 * twinkle * shimmer).toFixed(3)})`);
+    g.addColorStop(1, 'rgba(160,220,255,0)');
+    ctx.fillStyle = g;
+    ctx.beginPath(); ctx.arc(x, y, r * 3.5, 0, Math.PI * 2); ctx.fill();
+
+    // Core dot
+    ctx.fillStyle = `rgba(220,240,255,${(0.85 * twinkle * shimmer).toFixed(3)})`;
+    ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
+  }
+
+  ctx.restore();
+}
+
 function drawNorthStar(ctx: CanvasRenderingContext2D, x: number, y: number, t: number) {
   const pulse    = 0.72 + 0.28 * Math.sin(t * 0.004);
   const RAY      = 90 * pulse;
@@ -119,11 +189,11 @@ export default function DesktopBackground() {
       particles.length = 0;
       for (let i = 0; i < N_PARTS; i++) {
         particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
+          x:  Math.random() * canvas.width,
+          y:  Math.random() * canvas.height,
           vx: (Math.random() - 0.5) * 0.45,
           vy: (Math.random() - 0.5) * 0.45,
-          r: Math.random() * 1.3 + 0.6,
+          r:  Math.random() * 1.3 + 0.6,
           baseColor: COLORS[i % COLORS.length],
         });
       }
@@ -162,6 +232,9 @@ export default function DesktopBackground() {
         ctx.fillStyle = g;
         ctx.fillRect(0, 0, W, H);
       }
+
+      // ── Aquarius constellation (persistent) ────────────────
+      drawAquarius(ctx, W, H, t);
 
       // ── Twinkling starfield ─────────────────────────────────
       for (const s of stars) {
