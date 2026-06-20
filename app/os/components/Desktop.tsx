@@ -14,6 +14,7 @@ import BrowserApp from '../apps/BrowserApp';
 import SnakeApp from '../apps/SnakeApp';
 import App2048 from '../apps/App2048';
 import LeaderboardApp from '../apps/LeaderboardApp';
+import RacerApp from '../apps/RacerApp';
 import DesktopBackground from './DesktopBackground';
 
 function renderApp(appId: string) {
@@ -26,6 +27,7 @@ function renderApp(appId: string) {
     case 'snake':       return <SnakeApp />;
     case '2048':        return <App2048 />;
     case 'leaderboard': return <LeaderboardApp />;
+    case 'racer':       return <RacerApp />;
     default:            return null;
   }
 }

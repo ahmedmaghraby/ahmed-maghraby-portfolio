@@ -50,4 +50,18 @@ export const APPS: AppDefinition[] = [
     defaultSize: { width: 380, height: 480 },
     description: 'Play 2048',
   },
+  {
+    id: 'leaderboard',
+    title: 'Leaderboard',
+    icon: '🏆',
+    defaultSize: { width: 560, height: 500 },
+    description: 'Game High Scores',
+  },
+  {
+    id: 'racer',
+    title: 'Road Racer',
+    icon: '🏎',
+    defaultSize: { width: 680, height: 480 },
+    description: 'Pseudo-3D Racing Game',
+  },
 ];
