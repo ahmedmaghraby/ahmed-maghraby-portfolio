@@ -19,6 +19,7 @@ export interface ScoreEntry {
 }
 
 export interface GlobalScore {
+  uid: string;
   name: string;
   game: GameType;
   score: number;
@@ -30,6 +31,18 @@ export interface GlobalScore {
 
 const NAME_KEY    = 'ahmed-os-player-name';
 const COUNTRY_KEY = 'ahmed-os-player-country';
+const UID_KEY     = 'ahmed-os-player-uid';
+
+// Stable device-level UUID — generated once, never changes
+export function getUserId(): string {
+  if (typeof window === 'undefined') return '';
+  let uid = localStorage.getItem(UID_KEY);
+  if (!uid) {
+    uid = crypto.randomUUID();
+    localStorage.setItem(UID_KEY, uid);
+  }
+  return uid;
+}
 
 export function getUserName(): string | null {
   if (typeof window === 'undefined') return null;
@@ -102,11 +115,13 @@ export async function submitScore(game: GameType, score: number): Promise<void> 
 
   appendMyScore(game, score);
 
+  const uid     = getUserId();
   const name    = getUserName()    || 'Anonymous';
   const country = getUserCountry() || '';
 
   try {
     await addDoc(collection(db, COLL), {
+      uid,
       name,
       game,
       score,
@@ -143,6 +158,7 @@ export async function getGlobalTop(game: GameType, n = 10): Promise<GlobalScore[
       const d = doc.data();
       if (d.game !== game) return;
       all.push({
+        uid:     d.uid     ?? '',
         name:    d.name    ?? 'Anonymous',
         game:    d.game,
         score:   d.score   ?? 0,
