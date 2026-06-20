@@ -1,4 +1,4 @@
-export type AppId = 'about' | 'resume' | 'projects' | 'terminal' | 'browser' | 'snake' | '2048' | 'leaderboard' | 'racer';
+export type AppId = 'about' | 'resume' | 'projects' | 'terminal' | 'browser' | 'snake' | '2048' | 'leaderboard' | 'racer' | 'calculator' | 'notes';
 
 export interface Position {
   x: number;

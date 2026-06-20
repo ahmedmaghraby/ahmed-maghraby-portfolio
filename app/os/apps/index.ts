@@ -57,4 +57,18 @@ export const APPS: AppDefinition[] = [
     defaultSize: { width: 560, height: 500 },
     description: 'Game High Scores',
   },
+  {
+    id: 'calculator',
+    title: 'Calculator',
+    icon: '🧮',
+    defaultSize: { width: 280, height: 420 },
+    description: 'Calculator',
+  },
+  {
+    id: 'notes',
+    title: 'Notes',
+    icon: '📝',
+    defaultSize: { width: 620, height: 460 },
+    description: 'Notepad — saves locally',
+  },
 ];
