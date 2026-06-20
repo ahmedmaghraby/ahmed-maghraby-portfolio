@@ -24,8 +24,8 @@ const EXP = [
 export default function MobileView() {
   return (
     <div
-      className="min-h-screen w-full overflow-y-auto"
-      style={{ background: '#06090f', color: '#e2e8f0' }}
+      className="fixed inset-0 overflow-y-auto"
+      style={{ background: '#06090f', color: '#e2e8f0', WebkitOverflowScrolling: 'touch' }}
     >
       {/* Hero */}
       <section className="flex flex-col items-center justify-center px-6 pt-16 pb-12 text-center">
