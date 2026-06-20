@@ -9,6 +9,7 @@ import {
   getMyScores,
   getUserName,
   getUserCountry,
+  getUserId,
   setUserName,
   fetchAndCacheCountry,
 } from '../lib/leaderboard';
@@ -106,6 +107,7 @@ function NameGate({ onSave }: { onSave: (n: string) => void }) {
 
 export default function LeaderboardApp() {
   const [name, setName]           = useState<string | null>(null);
+  const [myUid, setMyUid]         = useState<string>('');
   const [country, setCountry]     = useState<string>('');
   const [tab, setTab]             = useState<Tab>('global');
   const [activeGame, setActiveGame] = useState<GameType>('snake');
@@ -117,6 +119,7 @@ export default function LeaderboardApp() {
   useEffect(() => {
     setName(getUserName());
     setCountry(getUserCountry());
+    setMyUid(getUserId());
   }, []);
 
   const loadGlobal = useCallback(async (game: GameType) => {
@@ -218,7 +221,7 @@ export default function LeaderboardApp() {
             Loading...
           </div>
         ) : tab === 'global' ? (
-          <GlobalList scores={globalScores} game={activeGame} myName={name} />
+          <GlobalList scores={globalScores} game={activeGame} myUid={myUid} />
         ) : (
           <MyList scores={myScores} game={activeGame} />
         )}
@@ -233,7 +236,7 @@ export default function LeaderboardApp() {
 
 // ─── Global leaderboard list ──────────────────────────────────────────────────
 
-function GlobalList({ scores, game, myName }: { scores: GlobalScore[]; game: GameType; myName: string }) {
+function GlobalList({ scores, game, myUid }: { scores: GlobalScore[]; game: GameType; myUid: string }) {
   const g = GAMES.find(x => x.id === game)!;
   if (!scores.length) {
     return (
@@ -248,7 +251,7 @@ function GlobalList({ scores, game, myName }: { scores: GlobalScore[]; game: Gam
   return (
     <div className="space-y-1.5">
       {scores.map((entry, idx) => {
-        const isMe = entry.name.toLowerCase() === myName.toLowerCase();
+        const isMe = !!myUid && entry.uid === myUid;
         return (
           <div
             key={idx}
