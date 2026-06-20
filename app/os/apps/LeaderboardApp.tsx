@@ -61,32 +61,37 @@ function NameGate({ onSave }: { onSave: (n: string) => void }) {
   };
 
   return (
-    <div className="h-full flex flex-col items-center justify-center gap-5 px-8" style={{ background: '#06090f' }}>
+    <div
+      className="h-full flex flex-col items-center overflow-y-auto px-8"
+      style={{ background: '#06090f', paddingTop: '15vh', paddingBottom: '10vh' }}
+    >
       <div style={{ fontSize: 36 }}>🏆</div>
-      <div className="font-mono font-bold" style={{ fontSize: 18, color: '#f5d393' }}>Join the Competition</div>
-      <p className="font-mono text-center" style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', lineHeight: 1.7 }}>
-        Enter your name to appear on the<br />global leaderboard. Play games to submit scores.
+      <div className="font-mono font-bold mt-4" style={{ fontSize: 18, color: '#f5d393' }}>
+        Join the Competition
+      </div>
+      <p className="font-mono text-center mt-3" style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', lineHeight: 1.7 }}>
+        Enter your name to appear on the<br />global leaderboard.
       </p>
       <input
-        autoFocus
         maxLength={24}
         placeholder="Your name..."
         value={val}
         onChange={e => setVal(e.target.value)}
         onKeyDown={e => e.key === 'Enter' && submit()}
-        className="font-mono px-4 py-2 rounded-lg outline-none w-full max-w-xs"
+        onFocus={e => setTimeout(() => e.target.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300)}
+        className="font-mono px-4 py-2 rounded-lg outline-none w-full max-w-xs mt-6"
         style={{
           background: 'rgba(255,255,255,0.05)',
           border: '1px solid rgba(245,211,147,0.25)',
           color: '#f5d393',
-          fontSize: 14,
+          fontSize: 16,
           caretColor: '#f5d393',
         }}
       />
       <button
         disabled={!val.trim() || loading}
         onClick={submit}
-        className="font-mono px-8 py-2 rounded-lg"
+        className="font-mono px-8 py-2 rounded-lg mt-4"
         style={{
           fontSize: 13,
           color: val.trim() ? '#06090f' : 'rgba(255,255,255,0.2)',
