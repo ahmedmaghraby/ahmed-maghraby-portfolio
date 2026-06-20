@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useReducer } from 'react';
+import { useCallback, useEffect, useReducer, useRef } from 'react';
 import { saveScore } from '../lib/leaderboard';
 
 type Grid = (number | 0)[][];
@@ -159,6 +159,22 @@ export default function App2048() {
     return () => window.removeEventListener('keydown', handleKey);
   }, [handleKey]);
 
+  const swipeOrigin = useRef<{ x: number; y: number } | null>(null);
+  const onTouchStart = (e: React.TouchEvent) => {
+    swipeOrigin.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (!swipeOrigin.current) return;
+    const dx = e.changedTouches[0].clientX - swipeOrigin.current.x;
+    const dy = e.changedTouches[0].clientY - swipeOrigin.current.y;
+    swipeOrigin.current = null;
+    if (Math.max(Math.abs(dx), Math.abs(dy)) < 20) return;
+    const dir: 'left' | 'right' | 'up' | 'down' = Math.abs(dx) > Math.abs(dy)
+      ? (dx > 0 ? 'right' : 'left')
+      : (dy > 0 ? 'down' : 'up');
+    dispatch({ type: 'MOVE', dir });
+  };
+
   return (
     <div
       className="h-full flex flex-col items-center justify-center gap-4 p-4"
@@ -211,7 +227,10 @@ export default function App2048() {
           borderRadius: 12,
           background: 'rgba(255,255,255,0.03)',
           border: '1px solid rgba(245,211,147,0.1)',
+          touchAction: 'none',
         }}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
       >
         {state.grid.map((row, r) =>
           row.map((val, c) => (

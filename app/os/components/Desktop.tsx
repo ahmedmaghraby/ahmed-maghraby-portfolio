@@ -21,6 +21,7 @@ import LeaderboardApp from '../apps/LeaderboardApp';
 import RacerApp from '../apps/RacerApp';
 import CalculatorApp from '../apps/CalculatorApp';
 import NotesApp from '../apps/NotesApp';
+import EmailApp from '../apps/EmailApp';
 import DesktopBackground from './DesktopBackground';
 
 function renderApp(appId: string, openApp: (app: AppDefinition) => void) {
@@ -36,6 +37,7 @@ function renderApp(appId: string, openApp: (app: AppDefinition) => void) {
     case 'racer':       return <RacerApp />;
     case 'calculator':  return <CalculatorApp />;
     case 'notes':       return <NotesApp />;
+    case 'email':       return <EmailApp />;
     default:            return null;
   }
 }
@@ -111,7 +113,8 @@ export default function Desktop() {
       {/* Interactive canvas background */}
       <DesktopBackground />
 
-      {/* Desktop Icons — absolutely positioned, draggable */}
+      {/* Desktop Icons — CSS hidden on mobile, draggable on desktop */}
+      <div className="hidden md:block">
       {APPS.map(app => {
         const p = iconPositions[app.id] ?? { x: 12, y: 12 };
         return (
@@ -127,6 +130,7 @@ export default function Desktop() {
           />
         );
       })}
+      </div>
 
       {/* Windows */}
       <AnimatePresence>
