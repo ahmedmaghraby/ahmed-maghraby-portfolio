@@ -34,7 +34,7 @@ const MachineGun: React.FC<LogoProps> = ({
 
         element = document.createElement("h3");
         element.className = "absolute font-mono text-center -translate-x-1/2 -translate-y-1/2 text-main text-9xl top-1/2 left-1/2";
-        element.innerHTML = word;
+        element.textContent = word;
         if (container.current) {
           container.current.appendChild(element);
         }
@@ -62,7 +62,7 @@ const MachineGun: React.FC<LogoProps> = ({
         if (i+1 === wordCount) {
           setTimeout(() => {
             if (container.current) {
-              container.current.innerHTML = "";
+              container.current.textContent = "";
             }
             finished();
           }, time * 1100);
