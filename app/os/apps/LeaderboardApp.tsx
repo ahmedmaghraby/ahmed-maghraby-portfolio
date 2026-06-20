@@ -8,15 +8,17 @@ import {
   getGlobalTop,
   getMyScores,
   getUserName,
+  getUserCountry,
   setUserName,
+  fetchAndCacheCountry,
 } from '../lib/leaderboard';
 
-// ─── Types & constants ────────────────────────────────────────────────────────
+// ─── Helpers ──────────────────────────────────────────────────────────────────
 
 const GAMES: { id: GameType; label: string; icon: string; color: string }[] = [
-  { id: 'snake',  label: 'Snake',  icon: '🐍', color: '#f5d393' },
-  { id: '2048',   label: '2048',   icon: '🎮', color: '#4af3ff' },
-  { id: 'racer',  label: 'Racer',  icon: '🏎', color: '#a78bfa' },
+  { id: 'snake', label: 'Snake', icon: '🐍', color: '#f5d393' },
+  { id: '2048',  label: '2048',  icon: '🎮', color: '#4af3ff' },
+  { id: 'racer', label: 'Racer', icon: '🏎', color: '#a78bfa' },
 ];
 
 type Tab = 'global' | 'mine';
@@ -26,9 +28,18 @@ function fmt(iso: string) {
   catch { return '—'; }
 }
 
+// Convert 2-letter ISO country code to flag emoji
+function flag(code: string): string {
+  if (!code || code.length !== 2) return '🌐';
+  const base = 0x1F1E6 - 65;
+  return Array.from(code.toUpperCase())
+    .map(c => String.fromCodePoint(c.charCodeAt(0) + base))
+    .join('');
+}
+
 function Medal({ rank }: { rank: number }) {
-  const m = ['🥇', '🥈', '🥉'];
-  if (rank < 3) return <span style={{ fontSize: 14 }}>{m[rank]}</span>;
+  const medals = ['🥇', '🥈', '🥉'];
+  if (rank < 3) return <span style={{ fontSize: 14 }}>{medals[rank]}</span>;
   return (
     <span className="font-mono" style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', width: 18, display: 'inline-block', textAlign: 'center' }}>
       {rank + 1}
@@ -36,10 +47,19 @@ function Medal({ rank }: { rank: number }) {
   );
 }
 
-// ─── Name gate ───────────────────────────────────────────────────────────────
+// ─── Name gate ────────────────────────────────────────────────────────────────
 
 function NameGate({ onSave }: { onSave: (n: string) => void }) {
-  const [val, setVal] = useState('');
+  const [val, setVal]         = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const submit = async () => {
+    if (!val.trim()) return;
+    setLoading(true);
+    await onSave(val.trim());
+    setLoading(false);
+  };
+
   return (
     <div className="h-full flex flex-col items-center justify-center gap-5 px-8" style={{ background: '#06090f' }}>
       <div style={{ fontSize: 36 }}>🏆</div>
@@ -53,7 +73,7 @@ function NameGate({ onSave }: { onSave: (n: string) => void }) {
         placeholder="Your name..."
         value={val}
         onChange={e => setVal(e.target.value)}
-        onKeyDown={e => e.key === 'Enter' && val.trim() && onSave(val.trim())}
+        onKeyDown={e => e.key === 'Enter' && submit()}
         className="font-mono px-4 py-2 rounded-lg outline-none w-full max-w-xs"
         style={{
           background: 'rgba(255,255,255,0.05)',
@@ -64,8 +84,8 @@ function NameGate({ onSave }: { onSave: (n: string) => void }) {
         }}
       />
       <button
-        disabled={!val.trim()}
-        onClick={() => val.trim() && onSave(val.trim())}
+        disabled={!val.trim() || loading}
+        onClick={submit}
         className="font-mono px-8 py-2 rounded-lg"
         style={{
           fontSize: 13,
@@ -74,9 +94,10 @@ function NameGate({ onSave }: { onSave: (n: string) => void }) {
           border: 'none',
           cursor: val.trim() ? 'pointer' : 'default',
           transition: 'all 0.15s',
+          opacity: loading ? 0.7 : 1,
         }}
       >
-        Enter Leaderboard →
+        {loading ? 'Detecting location…' : 'Enter Leaderboard →'}
       </button>
     </div>
   );
@@ -85,16 +106,19 @@ function NameGate({ onSave }: { onSave: (n: string) => void }) {
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export default function LeaderboardApp() {
-  const [name, setName] = useState<string | null>(null);
-  const [tab, setTab] = useState<Tab>('global');
+  const [name, setName]           = useState<string | null>(null);
+  const [country, setCountry]     = useState<string>('');
+  const [tab, setTab]             = useState<Tab>('global');
   const [activeGame, setActiveGame] = useState<GameType>('snake');
   const [globalScores, setGlobalScores] = useState<GlobalScore[]>([]);
-  const [myScores, setMyScores] = useState<ScoreEntry[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [nameEdit, setNameEdit] = useState(false);
+  const [myScores, setMyScores]   = useState<ScoreEntry[]>([]);
+  const [loading, setLoading]     = useState(false);
+  const [nameEdit, setNameEdit]   = useState(false);
 
-  // Load stored name on mount
-  useEffect(() => { setName(getUserName()); }, []);
+  useEffect(() => {
+    setName(getUserName());
+    setCountry(getUserCountry());
+  }, []);
 
   const loadGlobal = useCallback(async (game: GameType) => {
     setLoading(true);
@@ -116,10 +140,13 @@ export default function LeaderboardApp() {
     else loadMine(activeGame);
   }, [name, tab, activeGame, loadGlobal, loadMine]);
 
-  const handleSetName = (n: string) => {
+  // Called from NameGate — sets name AND fetches country
+  const handleSetName = async (n: string) => {
     setUserName(n);
     setName(n);
     setNameEdit(false);
+    const code = await fetchAndCacheCountry();
+    setCountry(code);
   };
 
   if (!name || nameEdit) {
@@ -133,8 +160,10 @@ export default function LeaderboardApp() {
       <div className="flex items-center justify-between px-5 py-3 shrink-0" style={{ borderBottom: '1px solid rgba(245,211,147,0.1)' }}>
         <div>
           <div className="font-mono font-bold" style={{ fontSize: 15, color: '#f5d393' }}>🏆 Leaderboard</div>
-          <div className="font-mono mt-0.5" style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.15em' }}>
-            Playing as <span style={{ color: '#4af3ff' }}>{name}</span>
+          <div className="font-mono mt-0.5 flex items-center gap-1.5" style={{ fontSize: 10, color: 'rgba(255,255,255,0.3)', letterSpacing: '0.15em' }}>
+            Playing as{' '}
+            {country && <span style={{ fontSize: 13 }}>{flag(country)}</span>}
+            <span style={{ color: '#4af3ff' }}>{name}</span>
           </div>
         </div>
         <button
@@ -231,9 +260,19 @@ function GlobalList({ scores, game, myName }: { scores: GlobalScore[]; game: Gam
             }}
           >
             <Medal rank={idx} />
-            <span className="font-mono flex-1" style={{ fontSize: 12, color: isMe ? g.color : 'rgba(255,255,255,0.8)' }}>
-              {entry.name} {isMe && <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.3)' }}>(you)</span>}
+
+            {/* Flag */}
+            {entry.country && (
+              <span style={{ fontSize: 14, lineHeight: 1 }} title={entry.country}>
+                {flag(entry.country)}
+              </span>
+            )}
+
+            <span className="font-mono flex-1 truncate" style={{ fontSize: 12, color: isMe ? g.color : 'rgba(255,255,255,0.8)' }}>
+              {entry.name}
+              {isMe && <span style={{ fontSize: 9, color: 'rgba(255,255,255,0.3)', marginLeft: 5 }}>(you)</span>}
             </span>
+
             <span className="font-mono font-bold tabular-nums" style={{ fontSize: 13, color: idx === 0 ? g.color : 'rgba(255,255,255,0.65)' }}>
               {entry.score.toLocaleString()}
             </span>
