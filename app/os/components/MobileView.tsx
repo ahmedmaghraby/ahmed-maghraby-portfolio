@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
-import Logo from '../../components/svg/Logo';
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -112,7 +111,7 @@ export default function MobileView() {
         />
 
         <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
-          <Logo width={130} height={65} />
+          <img src="/logo.png" width={130} alt="AHMED.OS" style={{ objectFit: 'contain' }} />
         </motion.div>
 
         <motion.h1

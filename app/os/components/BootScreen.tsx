@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import Logo from '../../components/svg/Logo';
 
 interface BootScreenProps {
   onComplete: () => void;
@@ -69,7 +68,7 @@ export default function BootScreen({ onComplete }: BootScreenProps) {
             transition={{ delay: 0.2, duration: 0.5 }}
             className="mb-1"
           >
-            <Logo width={220} height={110} />
+            <img src="/logo.png" width={220} alt="AHMED.OS" style={{ objectFit: 'contain' }} />
           </motion.div>
 
           {/* Subtitle */}

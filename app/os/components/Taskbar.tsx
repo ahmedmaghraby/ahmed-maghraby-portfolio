@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { useWindowManager } from '../context/WindowManagerContext';
 import { APPS } from '../apps';
-import Logo from '../../components/svg/Logo';
 
 export default function Taskbar() {
   const { windows, openApp, focusWindow, minimizeWindow } = useWindowManager();
@@ -33,7 +32,7 @@ export default function Taskbar() {
     >
       {/* Logo */}
       <div className="shrink-0 mr-2" style={{ opacity: 0.75 }}>
-        <Logo width={50} height={25} />
+        <img src="/logo.png" width={50} alt="AHMED.OS" style={{ objectFit: 'contain' }} />
       </div>
 
       {/* Separator */}
