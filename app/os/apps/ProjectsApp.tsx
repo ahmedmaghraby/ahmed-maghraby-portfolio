@@ -4,6 +4,25 @@ import { useEffect, useState } from 'react';
 import getProjects from '../../service/GetProjectDetails';
 import { ProjectProps } from '../../types/project';
 
+function ProjectImage({ src, alt }: { src?: string; alt: string }) {
+  const [err, setErr] = useState(false);
+  return (
+    <div
+      className="w-full rounded-lg overflow-hidden flex items-center justify-center"
+      style={{ height: 160, background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}
+    >
+      {src && !err ? (
+        <img src={src} alt={alt} className="w-full h-full object-cover" onError={() => setErr(true)} />
+      ) : (
+        <div className="flex flex-col items-center gap-2">
+          <span style={{ fontSize: 32, opacity: 0.15 }}>💼</span>
+          <span className="font-mono" style={{ fontSize: 10, color: 'rgba(255,255,255,0.2)' }}>No preview available</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function ProjectsApp() {
   const [projects, setProjects] = useState<ProjectProps[]>([]);
   const [loading, setLoading] = useState(true);
@@ -56,22 +75,7 @@ export default function ProjectsApp() {
 
         {/* Detail */}
         <div className="flex-1 overflow-y-auto p-5 space-y-4" style={{ scrollbarWidth: 'none' }}>
-          {selected.image && (
-            <div
-              className="w-full rounded-lg overflow-hidden"
-              style={{
-                height: 160,
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.06)',
-              }}
-            >
-              <img
-                src={selected.image}
-                alt={selected.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          )}
+          <ProjectImage src={selected.image} alt={selected.name} />
 
           <h2 className="font-mono font-bold" style={{ fontSize: 18, color: '#f5d393' }}>
             {selected.name}

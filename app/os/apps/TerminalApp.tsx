@@ -125,7 +125,7 @@ function processCommand(raw: string, openApp: (id: string) => void): Line[] {
       }
       if (cmd.startsWith('open ')) {
         const appId = arg.toLowerCase();
-        const valid = ['about', 'resume', 'projects', 'browser', 'snake', '2048'];
+        const valid = ['about', 'resume', 'projects', 'browser', 'snake', '2048', 'leaderboard'];
         if (valid.includes(appId)) {
           openApp(appId);
           return [{ type: 'output', content: `Opening ${appId}...` }];
