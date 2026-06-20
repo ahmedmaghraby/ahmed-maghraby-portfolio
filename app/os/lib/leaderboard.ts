@@ -4,7 +4,6 @@ import {
   collection,
   addDoc,
   query,
-  where,
   orderBy,
   limit,
   getDocs,
@@ -131,16 +130,18 @@ export async function submitScore(game: GameType, score: number): Promise<void> 
 
 export async function getGlobalTop(game: GameType, n = 10): Promise<GlobalScore[]> {
   try {
+    // No composite index needed: fetch top scores globally, filter by game client-side.
+    // where('game') + orderBy('score') would require a Firestore composite index.
     const q = query(
       collection(db, COLL),
-      where('game', '==', game),
       orderBy('score', 'desc'),
-      limit(n),
+      limit(200),
     );
     const snap = await getDocs(q);
     const all: GlobalScore[] = [];
     snap.forEach(doc => {
       const d = doc.data();
+      if (d.game !== game) return;
       all.push({
         name:    d.name    ?? 'Anonymous',
         game:    d.game,
@@ -151,7 +152,7 @@ export async function getGlobalTop(game: GameType, n = 10): Promise<GlobalScore[
           : new Date().toISOString(),
       });
     });
-    return all;
+    return all.slice(0, n);
   } catch (err) {
     console.error('[leaderboard] Firestore read failed:', err);
     return [];
