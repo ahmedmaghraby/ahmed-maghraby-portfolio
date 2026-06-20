@@ -13,17 +13,20 @@ import TerminalApp from '../apps/TerminalApp';
 import BrowserApp from '../apps/BrowserApp';
 import SnakeApp from '../apps/SnakeApp';
 import App2048 from '../apps/App2048';
+import LeaderboardApp from '../apps/LeaderboardApp';
+import DesktopBackground from './DesktopBackground';
 
 function renderApp(appId: string) {
   switch (appId) {
-    case 'about':    return <AboutApp />;
-    case 'resume':   return <ResumeApp />;
-    case 'projects': return <ProjectsApp />;
-    case 'terminal': return <TerminalApp />;
-    case 'browser':  return <BrowserApp />;
-    case 'snake':    return <SnakeApp />;
-    case '2048':     return <App2048 />;
-    default:         return null;
+    case 'about':       return <AboutApp />;
+    case 'resume':      return <ResumeApp />;
+    case 'projects':    return <ProjectsApp />;
+    case 'terminal':    return <TerminalApp />;
+    case 'browser':     return <BrowserApp />;
+    case 'snake':       return <SnakeApp />;
+    case '2048':        return <App2048 />;
+    case 'leaderboard': return <LeaderboardApp />;
+    default:            return null;
   }
 }
 
@@ -35,19 +38,8 @@ export default function Desktop() {
       className="w-screen h-screen overflow-hidden relative select-none"
       style={{ background: '#06090f' }}
     >
-      {/* Ambient grid background */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundImage: [
-            'radial-gradient(ellipse at 18% 18%, rgba(74,243,255,0.055) 0%, transparent 50%)',
-            'radial-gradient(ellipse at 82% 76%, rgba(245,211,147,0.055) 0%, transparent 50%)',
-            'linear-gradient(rgba(74,243,255,0.02) 1px, transparent 1px)',
-            'linear-gradient(90deg, rgba(74,243,255,0.02) 1px, transparent 1px)',
-          ].join(','),
-          backgroundSize: '100% 100%, 100% 100%, 50px 50px, 50px 50px',
-        }}
-      />
+      {/* Interactive canvas background */}
+      <DesktopBackground />
 
       {/* Desktop Icons */}
       <div className="absolute top-4 left-4 flex flex-col gap-1 z-10">
