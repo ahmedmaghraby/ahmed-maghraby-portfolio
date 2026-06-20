@@ -14,7 +14,8 @@ type Action =
   | { type: 'MINIMIZE'; id: string }
   | { type: 'MAXIMIZE'; id: string }
   | { type: 'FOCUS'; id: string }
-  | { type: 'MOVE'; id: string; position: Position };
+  | { type: 'MOVE'; id: string; position: Position }
+  | { type: 'SNAP'; id: string; position: Position; size: { width: number; height: number } };
 
 function reducer(state: ManagerState, action: Action): ManagerState {
   switch (action.type) {
@@ -80,6 +81,16 @@ function reducer(state: ManagerState, action: Action): ManagerState {
           w.id === action.id ? { ...w, position: action.position } : w
         ),
       };
+    case 'SNAP':
+      return {
+        ...state,
+        maxZ: state.maxZ + 1,
+        windows: state.windows.map(w =>
+          w.id === action.id
+            ? { ...w, position: action.position, size: action.size, isMaximized: false, zIndex: state.maxZ + 1 }
+            : w
+        ),
+      };
     default:
       return state;
   }
@@ -93,6 +104,7 @@ interface WindowManagerContextType {
   maximizeWindow: (id: string) => void;
   focusWindow: (id: string) => void;
   moveWindow: (id: string, position: Position) => void;
+  snapWindow: (id: string, position: Position, size: { width: number; height: number }) => void;
 }
 
 const WindowManagerContext = createContext<WindowManagerContextType | null>(null);
@@ -109,10 +121,15 @@ export function WindowManagerProvider({ children }: { children: React.ReactNode 
     (id: string, position: Position) => dispatch({ type: 'MOVE', id, position }),
     []
   );
+  const snapWindow = useCallback(
+    (id: string, position: Position, size: { width: number; height: number }) =>
+      dispatch({ type: 'SNAP', id, position, size }),
+    []
+  );
 
   return (
     <WindowManagerContext.Provider
-      value={{ windows: state.windows, openApp, closeWindow, minimizeWindow, maximizeWindow, focusWindow, moveWindow }}
+      value={{ windows: state.windows, openApp, closeWindow, minimizeWindow, maximizeWindow, focusWindow, moveWindow, snapWindow }}
     >
       {children}
     </WindowManagerContext.Provider>
