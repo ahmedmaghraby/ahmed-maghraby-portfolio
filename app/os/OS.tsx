@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { WindowManagerProvider } from './context/WindowManagerContext';
+import { ToastProvider } from './context/ToastContext';
 import Desktop from './components/Desktop';
 import BootScreen from './components/BootScreen';
 import MobileView from './components/MobileView';
@@ -20,9 +21,11 @@ export default function OS() {
   if (isMobile) return <MobileView />;
 
   return (
-    <WindowManagerProvider>
-      <Desktop />
-      {!booted && <BootScreen onComplete={() => setBooted(true)} />}
-    </WindowManagerProvider>
+    <ToastProvider>
+      <WindowManagerProvider>
+        <Desktop />
+        {!booted && <BootScreen onComplete={() => setBooted(true)} />}
+      </WindowManagerProvider>
+    </ToastProvider>
   );
 }
