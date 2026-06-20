@@ -18,7 +18,6 @@ import {
 const GAMES: { id: GameType; label: string; icon: string; color: string }[] = [
   { id: 'snake', label: 'Snake', icon: '🐍', color: '#f5d393' },
   { id: '2048',  label: '2048',  icon: '🎮', color: '#4af3ff' },
-  { id: 'racer', label: 'Racer', icon: '🏎', color: '#a78bfa' },
 ];
 
 type Tab = 'global' | 'mine';
