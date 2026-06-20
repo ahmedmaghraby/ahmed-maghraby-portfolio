@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useReducer } from 'react';
+import { saveScore } from '../lib/leaderboard';
 
 type Grid = (number | 0)[][];
 
@@ -134,6 +135,12 @@ function fontSize(val: number) {
 
 export default function App2048() {
   const [state, dispatch] = useReducer(reducer, undefined, initState);
+
+  useEffect(() => {
+    if ((state.over || state.won) && state.score > 0) {
+      saveScore('2048', state.score);
+    }
+  }, [state.over, state.won]);
 
   const handleKey = useCallback((e: KeyboardEvent) => {
     const map: Record<string, 'left' | 'right' | 'up' | 'down'> = {

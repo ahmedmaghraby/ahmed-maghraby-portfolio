@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { saveScore } from '../lib/leaderboard';
 
 const COLS = 18;
 const ROWS = 18;
@@ -107,6 +108,7 @@ export default function SnakeApp() {
     ) {
       s.dead = true;
       setDead(true);
+      saveScore('snake', s.score);
       if (timerRef.current) clearInterval(timerRef.current);
       draw();
       return;
