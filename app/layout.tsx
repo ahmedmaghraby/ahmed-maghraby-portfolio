@@ -147,12 +147,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <Script
                     id="schema-person"
                     type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema).replace(/<\/script>/gi, '<\\/script>') }}
                 />
                 <Script
                     id="schema-website"
                     type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema).replace(/<\/script>/gi, '<\\/script>') }}
                 />
             </head>
             <body

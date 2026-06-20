@@ -24,10 +24,17 @@ export default function BrowserApp() {
     if (win && !win.isMaximized) maximizeWindow(win.id);
   };
 
+  const sanitizeUrl = (raw: string): string => {
+    let u = raw.trim();
+    if (!u) return '';
+    if (/^(javascript|data|vbscript):/i.test(u)) return '';
+    if (!u.startsWith('/') && !/^https?:\/\//i.test(u)) u = `https://${u}`;
+    return u;
+  };
+
   const navigate = (target: string) => {
-    let full = target.trim();
+    const full = sanitizeUrl(target);
     if (!full) return;
-    if (!full.startsWith('/') && !/^https?:\/\//i.test(full)) full = `https://${full}`;
     setUrl(full);
     setActiveUrl(full);
     setBlocked(false);
