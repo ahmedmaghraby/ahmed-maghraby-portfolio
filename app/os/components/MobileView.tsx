@@ -235,8 +235,12 @@ function MobileOSInner() {
               <div style={{ width: 80 }} />
             </div>
 
-            {/* App content */}
-            <div className="flex-1 overflow-hidden" style={{ touchAction: 'auto' }}>
+            {/* App content — stop propagation so game swipes don't trigger drag-to-close */}
+            <div
+              className="flex-1 overflow-hidden"
+              style={{ touchAction: 'auto' }}
+              onPointerDown={e => e.stopPropagation()}
+            >
               {renderApp(openApp.id)}
             </div>
 
