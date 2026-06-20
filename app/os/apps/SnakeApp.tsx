@@ -169,6 +169,25 @@ export default function SnakeApp() {
     return () => window.removeEventListener('keydown', onKey);
   }, [started, dead]);
 
+  // Touch / swipe support
+  const touchRef = useRef<{ x: number; y: number } | null>(null);
+  const onTouchStart = (e: React.TouchEvent) => {
+    touchRef.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (!touchRef.current || !started || dead) return;
+    const dx = e.changedTouches[0].clientX - touchRef.current.x;
+    const dy = e.changedTouches[0].clientY - touchRef.current.y;
+    touchRef.current = null;
+    if (Math.max(Math.abs(dx), Math.abs(dy)) < 20) return;
+    const s = stateRef.current;
+    const opposites: Record<Dir, Dir> = { U: 'D', D: 'U', L: 'R', R: 'L' };
+    const dir: Dir = Math.abs(dx) > Math.abs(dy)
+      ? (dx > 0 ? 'R' : 'L')
+      : (dy > 0 ? 'D' : 'U');
+    if (opposites[dir] !== s.dir) s.nextDir = dir;
+  };
+
   const W = COLS * CELL;
   const H = ROWS * CELL;
 
@@ -192,7 +211,7 @@ export default function SnakeApp() {
             CONTROLS
           </div>
           <div className="font-mono" style={{ fontSize: 11, color: 'rgba(255,255,255,0.3)' }}>
-            ↑ ↓ ← → or WASD
+            ↑ ↓ ← → · WASD · swipe
           </div>
         </div>
       </div>
@@ -205,7 +224,10 @@ export default function SnakeApp() {
           borderRadius: 8,
           overflow: 'hidden',
           background: '#040608',
+          touchAction: 'none',
         }}
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
       >
         <canvas ref={canvasRef} width={W} height={H} />
 
